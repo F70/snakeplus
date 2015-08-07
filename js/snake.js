@@ -31,7 +31,7 @@ Snake.prototype.extend=function(length,extendType) {
 	}
 	this.headPoint={
 		x:this.parts[this.parts.length-1].endPoint.x+this.width*Math.cos(this.parts[this.parts.length-1].endDirection),
-		y:this.parts[this.parts.length-1].endPoint.y-this.width*Math.sin(this.parts[this.parts.length-1].endDirection),
+		y:this.parts[this.parts.length-1].endPoint.y+this.width*Math.sin(this.parts[this.parts.length-1].endDirection),
 	}
 	if (this.headPoint.x<0) {
 			this.headPoint.x+=game.groundSize
@@ -78,8 +78,8 @@ Snake.prototype.draw=function() {
 		for (var j=-1;j<2;j++) {
 			
 			game.canvas.moveTo(this.headPoint.x+i*game.groundSize,this.headPoint.y+j*game.groundSize)
-			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y+this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
-			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y+this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
+			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
+			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
 			game.canvas.fillStyle=game.color
 			game.canvas.fill()
 			game.canvas.closePath()
