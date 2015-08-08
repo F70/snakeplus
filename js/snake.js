@@ -5,7 +5,7 @@ function Snake(length,width,speed,turningRadius) {
 	this.width=width
 	this.speed=speed
 	this.turningRadius=turningRadius
-	this.parts=[new Part(this.length,{x:game.groundSize/2,y:game.groundSize/2+this.width/2+this.length/2},Math.PI/2,0)]
+	this.parts=[new Part(this.length,{x:game.groundSize/2,y:game.groundSize/2+this.width/2+this.length/2},-Math.PI/2,0)]
 	this.headPoint={x:game.groundSize/2,y:game.groundSize/2-this.width/2-this.length/2}
 	this.ungrownLength=0
 	
@@ -70,6 +70,14 @@ Snake.prototype.move=function(moveType) {
 
 Snake.prototype.draw=function() {
 	
+	game.canvas.moveTo(0,0)
+	game.canvas.lineTo(0,game.groundSize)
+	game.canvas.lineTo(game.groundSize,game.groundSize)
+	game.canvas.lineTo(game.groundSize,0)
+	game.canvas.fillStyle="#000"
+	game.canvas.fill()
+	game.canvas.closePath()
+	game.canvas.beginPath()
 	for (var t = 0; t < this.parts.length; t++) {
 		this.parts[t].draw()
 	}

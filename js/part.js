@@ -1,4 +1,3 @@
-/* global game */
 //parts of game.snake
 function Part(length,startPoint,startDirection,partType) {
 	

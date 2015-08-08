@@ -1,27 +1,18 @@
-var keyboard={left:false,right:false}
-
 Game.prototype.setController=function() {
 	
 	function keydown(event) {
 		
 		switch (event.keyCode) {
 			case 39://right
-				if (keyboard.right==false) {
-					game.input+=1
-					console.log(game.input)
-					keyboard.right=true
-				}
+				game.input.right=1
 				break;
 			case 37://left
-				if (keyboard.left==false) {
-					game.input-=1
-					console.log(game.input)
-					keyboard.left=true
-				}
+				game.input.left=1
 				break;
 			default:
 				break;
 		}
+		console.log(game.input)
 		
 	}
 	
@@ -29,18 +20,15 @@ Game.prototype.setController=function() {
 		
 		switch (event.keyCode) {
 			case 39://right
-				game.input-=1
-				console.log(game.input)
-				keyboard.right=false
+				game.input.right=0
 				break;
 			case 37://left
-				game.input+=1
-				console.log(game.input)
-				keyboard.left=false
+				game.input.left=0
 				break;
 			default:
 				break;
 		}
+		console.log(game.input)
 		
 	}
 	
