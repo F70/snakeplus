@@ -14,7 +14,7 @@ function Snake(length,width,speed,turningRadius) {
 Snake.prototype.extend=function(length,extendType) {
 	
 	if (extendType!=this.parts[this.parts.length-1].partType||length+this.parts[this.parts.length-1].length>game.groundSize-this.width) {
-		var newStartPoint=this.parts[this.parts.length-1].endPoint
+		var newStartPoint=Object.clone(this.parts[this.parts.length-1].endPoint)
 		if (newStartPoint.x<0) {
 			newStartPoint.x+=game.groundSize
 		} else if (newStartPoint.x>=game.groundSize) {

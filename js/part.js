@@ -5,10 +5,22 @@ function Part(length,startPoint,startDirection,partType) {
 		partType=0
 	}
 	
+	
 	this.length=length
 	this.partType=partType //0=straight 1=clockwise -1=anticlockwise
-	this.startPoint=startPoint
+	this.startPoint=Object.clone(startPoint)
 	this.startDirection=startDirection//0=right pi/2=down
+	
+	if (this.startPoint.x>=game.groundSize) {
+		this.startPoint.x-=game.groundSize
+	} else if(this.startPoint.x<0) {
+		this.startPoint.x+=game.groundSize
+	}
+	if (this.startPoint.y>=game.groundSize) {
+		this.startPoint.y-=game.groundSize
+	} else if(this.startPoint.y<0) {
+		this.startPoint.y+=game.groundSize
+	}
 	
 	switch (this.partType) {
 		case 1:
@@ -95,7 +107,7 @@ Part.prototype.shorten=function(shortenLength) {
 			this.startDirection=this.endDirection+this.length/game.snake.turningRadius
 			if (this.startDirection>2*Math.PI) {this.startDirection-=2*Math.PI}
 			this.startPoint={
-				x:this.arcCenter.x-game.snake.turningRadius*Math.sin(this.staerDirection),
+				x:this.arcCenter.x-game.snake.turningRadius*Math.sin(this.startDirection),
 				y:this.arcCenter.y+game.snake.turningRadius*Math.cos(this.startDirection),
 			}
 			break;
