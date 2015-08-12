@@ -160,6 +160,18 @@ Part.prototype.draw=function() {
 			game.canvas.fill()
 			game.canvas.closePath()
 			game.canvas.beginPath()
+			game.canvas.lineWidth=1
+			game.canvas.strokeStyle=game.color
+			game.canvas.moveTo(this.endPoint.x+Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.endPoint.y-Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
+			game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
+			game.canvas.stroke()
+			game.canvas.closePath()
+			game.canvas.beginPath()
+			game.canvas.moveTo(this.startPoint.x-Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.startPoint.y+Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
+			game.canvas.lineTo(this.startPoint.x+Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.startPoint.y-Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
+			game.canvas.stroke()
+			game.canvas.closePath()
+			game.canvas.beginPath()
 			
 		}
 	}

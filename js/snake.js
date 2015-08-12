@@ -70,16 +70,12 @@ Snake.prototype.move=function(moveType) {
 
 Snake.prototype.draw=function() {
 	
-	game.canvas.moveTo(0,0)
-	game.canvas.lineTo(0,game.groundSize)
-	game.canvas.lineTo(game.groundSize,game.groundSize)
-	game.canvas.lineTo(game.groundSize,0)
-	game.canvas.fillStyle="#000"
-	game.canvas.fill()
-	game.canvas.closePath()
-	game.canvas.beginPath()
+	game.canvas.clearRect(0,0,game.groundSize,game.groundSize)
 	for (var t = 0; t < this.parts.length; t++) {
 		this.parts[t].draw()
+	}
+	if (game.canvas.getImageData(this.headPoint.x,this.headPoint.y,1,1).data[3]!=0) {
+		game.dead=true
 	}
 	var headDirection=this.parts[this.parts.length-1].endDirection
 	for (var i=-1;i<2;i++) {
