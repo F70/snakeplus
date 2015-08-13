@@ -5,9 +5,11 @@ Game.prototype.setController=function() {
 		switch (event.keyCode) {
 			case 39://right
 				game.input.keyRight=1
+				this.noInputDuring=0
 				break;
 			case 37://left
 				game.input.keyLeft=1
+				this.noInputDuring=0
 				break;
 			default:
 				break;
@@ -21,9 +23,11 @@ Game.prototype.setController=function() {
 		switch (event.keyCode) {
 			case 39://right
 				game.input.keyRight=0
+				this.noInputDuring=0
 				break;
 			case 37://left
 				game.input.keyLeft=0
+				this.noInputDuring=0
 				break;
 			default:
 				break;

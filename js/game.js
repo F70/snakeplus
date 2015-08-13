@@ -25,6 +25,7 @@ function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpee
 	this.growthPerFood=growthPerFood
 	
 	this.score=0
+	this.noInputDuring=0
 
 }
 
@@ -37,12 +38,17 @@ Game.prototype.loop=function() {
 	if (this.dead==true) {
 		return
 	}
+	this.noInputDuring++
+	console.log(this.noInputDuring)
 	this.snake.move(this.input.keyRight-this.input.keyLeft)
 	this.snake.draw()
 	if (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2) {
 		this.score++
 		this.resetFood()
 		this.snake.ungrownLength+=this.growthPerFood
+	}
+	if (this.noInputDuring>this.groundSize*this.groundSize/this.snakeSpeed/this.snakeWidth) {
+		return
 	}
 	this.loopId=requestAnimationFrame(function(){game.loop()})
 	
