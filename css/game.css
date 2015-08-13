@@ -2,7 +2,7 @@ body,div,p {margin:0;padding:0}
 body {font-family:arial;background-color:#000}
 
 .box {width:100%;height:100%;position:absolute;display:flex;background-color:rgba(0,0,0,0)}
-.innerBox {position:relative;top:0;bottom:0;left:0;right:0;margin:auto;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;color:#f70;font-size:128px;background-color:rgba(0,0,0,0)}
+.innerBox {position:relative;top:0;bottom:0;left:0;right:0;margin:auto;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;background-color:rgba(0,0,0,0)}
 
 #snakeArea {width:100%;height:100%;position:absolute;z-index:0}
-#food {width:24px;height:24px;position:absolute;z-index:1}
+#food {width:24px;height:24px;position:absolute;top:0;left:0;z-index:1;background-color:#F70}

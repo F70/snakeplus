@@ -1,4 +1,4 @@
-function Game(canvasId,groundSize,color) {
+function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpeed,snakeTurningRadius,foodSize,growthPerFood) {
 	
 	this.canvas=document.getElementById(canvasId).getContext("2d")
 	this.groundSize=groundSize
@@ -10,16 +10,40 @@ function Game(canvasId,groundSize,color) {
 	}
 	this.dead=false
 	
+	this.originalSnakeLength=originalSnakeLength
+	this.snakeWidth=snakeWidth
+	this.snakeSpeed=snakeSpeed
+	this.snakeTurningRadius=snakeTurningRadius
+	
+	this.foodSize=foodSize
+	this.foodPoint={
+		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
+		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
+	}
+	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
+	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
+	this.growthPerFood=growthPerFood
+	
+	this.score=0
+
 }
 
-Game.prototype.setSnake=function(snakeLength,snakeWidth,snakeSpeed,snakeTurningRadius){
-	this.snake=new Snake(snakeLength,snakeWidth,snakeSpeed,snakeTurningRadius)
+Game.prototype.setSnake=function() {
+	this.snake=new Snake(this.originalSnakeLength,this.snakeWidth,this.snakeSpeed,this.snakeTurningRadius)
 }
 
 Game.prototype.loop=function() {
 	
+	if (this.dead==true) {
+		return
+	}
 	this.snake.move(this.input.keyRight-this.input.keyLeft)
 	this.snake.draw()
+	if (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2) {
+		this.score++
+		this.resetFood()
+		this.snake.ungrownLength+=this.growthPerFood
+	}
 	this.loopId=requestAnimationFrame(function(){game.loop()})
 	
 }
@@ -29,3 +53,28 @@ Game.prototype.pause=function() {
 	cancelAnimationFrame(this.loopId)
 	
 }
+
+Game.prototype.reset=function() {
+	
+	this.score=0
+	this.dead=false
+	this.setSnake()
+	this.resetFood()
+	this.loop()
+
+}
+
+Game.prototype.resetFood=function () {
+	
+	do {
+		this.foodPoint={
+		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
+		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
+	}
+	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2);
+	
+	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
+	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
+	
+}
+

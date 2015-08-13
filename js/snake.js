@@ -88,6 +88,13 @@ Snake.prototype.draw=function() {
 			game.canvas.fill()
 			game.canvas.closePath()
 			game.canvas.beginPath()
+			game.canvas.lineWidth=1
+			game.canvas.strokeStyle=game.color
+			game.canvas.moveTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
+			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
+			game.canvas.stroke()
+			game.canvas.closePath()
+			game.canvas.beginPath()
 			
 		}
 	}
