@@ -67,6 +67,7 @@ Game.prototype.reset=function() {
 	this.setSnake()
 	this.resetFood()
 	this.loop()
+	this.noInputDuring=0
 
 }
 
