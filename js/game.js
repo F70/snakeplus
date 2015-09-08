@@ -16,10 +16,13 @@ function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpee
 	this.snakeTurningRadius=snakeTurningRadius
 	
 	this.foodSize=foodSize
-	this.foodPoint={
+	
+	do {
+		this.foodPoint={
 		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 	}
+	} while (this.foodPoint.x>=(this.groundSize-this.snakeWidth-this.originalSnakeLength)/2&&this.foodPoint.x<=(this.groundSize+this.snakeWidth+this.originalSnakeLength)/2&&this.foodPoint.y>=(this.groundSize+this.snakeWidth)/2&&this.foodPoint.y<=(this.groundSize-this.snakeWidth)/2);
 	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
 	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
 	this.growthPerFood=growthPerFood
@@ -65,7 +68,7 @@ Game.prototype.reset=function() {
 	this.score=0
 	this.dead=false
 	this.setSnake()
-	this.resetFood()
+	this.resetFoodWhenRestart()
 	this.loop()
 	this.noInputDuring=0
 
@@ -78,7 +81,21 @@ Game.prototype.resetFood=function () {
 		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 	}
-	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2);
+	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2&&game.canvas.getImageData(this.foodPoint.x,this.foodPoint.y,1,1).data[3]!=0);
+	
+	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
+	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
+	
+}
+
+Game.prototype.resetFoodWhenRestart=function () {
+	
+	do {
+		this.foodPoint={
+		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
+		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
+	}
+	} while (this.foodPoint.x>=(this.groundSize-this.snakeWidth-this.originalSnakeLength)/2&&this.foodPoint.x<=(this.groundSize+this.snakeWidth+this.originalSnakeLength)/2&&this.foodPoint.y>=(this.groundSize+this.snakeWidth)/2&&this.foodPoint.y<=(this.groundSize-this.snakeWidth)/2);
 	
 	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
 	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
