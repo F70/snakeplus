@@ -2,31 +2,32 @@ Game.prototype.setUI=function() {
 	
 	document.getElementById("box").addEventListener("transitionend",function (event) {
 		if (event.currentTarget.style.backgroundColor==getComputedStyle(document.getElementById("box")).borderColor) {
-			if (document.getElementById(game.ui.currentBoardId)!=undefined) {
-				document.getElementById(game.ui.currentBoardId).style.display="none"
-			}
-			if (document.getElementById(game.ui.toJumpBoardId)!=undefined) {
-				document.getElementById(game.ui.toJumpBoardId).style.display="inline"
-			}
-			game.ui.currentBoardId=game.ui.toJumpBoardId
+			game.ui.toRunFunction()
+			
 			game.ui.toJumpBoardId=""
 			document.getElementById("box").style.backgroundColor="rgba(0,0,0,0)"
 		}
 	},false)
 	
 	this.ui={
-		currentBoardId:"",
-		transitionAnimation:function(jumpFunction,afterFunction) {
-			
-		},
+		currentBoardId:"menu",
 		jumpToBoard:function(boardId) {
 			if (boardId==this.currentBoardId) {
 				return
 			}
-			this.toJumpBoardId=boardId
+			
+			this.toRunFunction=function() {
+				if (document.getElementById(this.currentBoardId)!=undefined) {
+					document.getElementById(this.currentBoardId).style.display="none"
+				}
+				if (document.getElementById(boardId)!=undefined) {
+					document.getElementById(boardId).style.display="inline"
+				}
+				this.currentBoardId=boardId
+			}
 			document.getElementById("box").style.backgroundColor=game.color
 		},
-		toJumpBoardId:"",
+		toRunFunction:undefined,
 	}
 	
 }
