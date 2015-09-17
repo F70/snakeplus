@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="play.svg">
+   sodipodi:docname="seting.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="48"
-     inkscape:cx="3.6725053"
-     inkscape:cy="24.365346"
+     inkscape:zoom="1"
+     inkscape:cx="18.819984"
+     inkscape:cy="18.953252"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -53,9 +53,19 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff7700;stroke-width:1.00000012;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 32.86987,20.000004 -19.8035,-11.1367803 0,22.2735533 z"
+       style="fill:none;fill-rule:evenodd;stroke:#ff7f00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 8,10 20,0 0,2 4,0 0,-4 -4,0 0,2"
        id="path4142"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ff7f00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 8,30 20,0 0,2 4,0 0,-4 -4,0 0,2"
+       id="path4142-2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ff7f00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 32,20 -20,0 0,2 -4,0 0,-4 4,0 0,2"
+       id="path4142-3"
        inkscape:connector-curvature="0" />
   </g>
 </svg>

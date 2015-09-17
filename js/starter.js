@@ -5,7 +5,6 @@ function loadGame() {
 	game.setSnake()
 	game.setController()
 	game.setUI()
-	game.loop()
 }
 
 requestAnimationFrame(loadGame)

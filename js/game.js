@@ -102,3 +102,12 @@ Game.prototype.resetFoodWhenRestart=function () {
 	
 }
 
+Game.prototype.begin=function () {
+	document.getElementById("gameBox").style.display="inline"
+	this.reset()
+}
+
+Game.prototype.end=function () {
+	this.pause()
+		document.getElementById("gameBox").style.display="none"
+}
