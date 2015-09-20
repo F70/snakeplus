@@ -1,7 +1,9 @@
 Game.prototype.setController=function() {
 	
 	function keydown(event) {
-		
+		if (game.dead==true) {
+			return	
+		}
 		switch (event.keyCode) {
 			case 39://right
 				game.input.keyRight=1
@@ -11,6 +13,10 @@ Game.prototype.setController=function() {
 				game.input.keyLeft=1
 				this.noInputDuring=0
 				break;
+			case 80://pause
+				game.pause()
+				game.noInputDuring=0
+			break;
 			default:
 				break;
 		}
@@ -19,7 +25,9 @@ Game.prototype.setController=function() {
 	}
 	
 	function keyup(event) {
-		
+		if (game.dead==true) {
+			return	
+		}
 		switch (event.keyCode) {
 			case 39://right
 				game.input.keyRight=0
