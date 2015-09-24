@@ -51,6 +51,7 @@ Game.prototype.loop=function() {
 		this.snake.ungrownLength+=this.growthPerFood
 	}
 	if (this.noInputDuring>this.groundSize*this.groundSize/this.snakeSpeed/this.snakeWidth) {
+		document.getElementById("pauseOverlay").style.display="inline"
 		return
 	}
 	this.loopId=requestAnimationFrame(function(){game.loop()})
@@ -60,6 +61,7 @@ Game.prototype.loop=function() {
 Game.prototype.pause=function() {
 	
 	cancelAnimationFrame(this.loopId)
+	document.getElementById("pauseOverlay").style.display="inline"
 	
 }
 
@@ -102,3 +104,12 @@ Game.prototype.resetFoodWhenRestart=function () {
 	
 }
 
+Game.prototype.begin=function () {
+	document.getElementById("gameBox").style.display="inline"
+	this.reset()
+}
+
+Game.prototype.end=function () {
+	this.pause()
+	document.getElementById("gameBox").style.display="none"
+}
