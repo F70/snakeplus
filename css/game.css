@@ -27,3 +27,9 @@ html,body {margin:0;height:100%}
 #backToMenuFromGameButton {background-image:url(../img/back.svg)}
 #replayButton {margin-left:8px;background-image:url(../img/reset.svg)}
 #continueButton {margin-left:8px;background-image:url(../img/play.svg)}
+
+/*setting*/
+#backToMenuFromSettingButton {border:none;position:absolute;top:0;left:0;background-image:url(../img/back.svg)}
+
+/*credit*/
+#backToMenuFromCreditButton {border:none;position:absolute;top:0;left:0;background-image:url(../img/back.svg)}

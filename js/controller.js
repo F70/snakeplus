@@ -14,8 +14,10 @@ Game.prototype.setController=function() {
 				this.noInputDuring=0
 				break;
 			case 80://pause
+				if (document.getElementById("gameBox").style.display=="inline") {
 				game.pause()
-				game.noInputDuring=0
+				game.noInputDuring=0	
+				}
 			break;
 			default:
 				break;

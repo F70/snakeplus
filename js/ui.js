@@ -9,8 +9,8 @@ Game.prototype.setUI=function() {
 	}
 	
 	var backToMenuFromGame=function () {
-		document.getElementById("pauseOverlay").style.display="none"
 		game.ui.toRunFunction=function () {
+			document.getElementById("pauseOverlay").style.display="none"
 			document.getElementById("gameBox").style.display="none"
 			document.getElementById("menu").style.display="inline"
 			game.ui.currentBoardId="menu"
@@ -19,8 +19,8 @@ Game.prototype.setUI=function() {
 	}
 	
 	var replay=function () {
-		document.getElementById("pauseOverlay").style.display="none"
-		game.ui.toRunFunction=function () {
+			game.ui.toRunFunction=function () {
+			document.getElementById("pauseOverlay").style.display="none"
 			game.reset()
 		}
 		document.getElementById("box").style.backgroundColor=game.color
@@ -57,6 +57,9 @@ Game.prototype.setUI=function() {
 	document.getElementById("backToMenuFromGameButton").addEventListener("click",backToMenuFromGame,false)
 	document.getElementById("replayButton").addEventListener("click",replay,false)
 	document.getElementById("continueButton").addEventListener("click",continueGame,false)
+	document.getElementById("backToMenuFromSettingButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
+	document.getElementById("backToMenuFromCreditButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
+	
 	
 	document.getElementById("box").addEventListener("transitionend",function (event) {
 		if (event.currentTarget.style.backgroundColor==getComputedStyle(document.getElementById("box")).borderColor) {
