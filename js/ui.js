@@ -9,8 +9,9 @@ Game.prototype.setUI=function() {
 	}
 	
 	var backToMenuFromGame=function () {
-		game.ui.toRunFunction=function () {
-			document.getElementById("pauseOverlay").style.display="none"
+		document.getElementById("pauseOverlay").style.opacity="0"
+		document.getElementById("pauseOverlay").style.visibility="hidden"	
+		game.ui.toRunFunction=function () {		
 			document.getElementById("gameBox").style.display="none"
 			document.getElementById("menu").style.display="inline"
 			game.ui.currentBoardId="menu"
@@ -19,15 +20,17 @@ Game.prototype.setUI=function() {
 	}
 	
 	var replay=function () {
+		document.getElementById("pauseOverlay").style.opacity="0"
+		document.getElementById("pauseOverlay").style.visibility="hidden"
 			game.ui.toRunFunction=function () {
-			document.getElementById("pauseOverlay").style.display="none"
 			game.reset()
 		}
 		document.getElementById("box").style.backgroundColor=game.color
 	}
 	
 	var continueGame=function () {
-		document.getElementById("pauseOverlay").style.display="none"
+			document.getElementById("pauseOverlay").style.opacity="0"
+			document.getElementById("pauseOverlay").style.visibility="hidden"	
 		game.noInputDuring=0
 		game.loop()
 	}
