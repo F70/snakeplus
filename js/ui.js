@@ -9,25 +9,29 @@ Game.prototype.setUI=function() {
 	}
 	
 	var backToMenuFromGame=function () {
-		game.ui.toRunFunction=function () {
-			document.getElementById("pauseOverlay").style.display="none"
+		document.getElementById("pauseOverlay").style.opacity="0"
+		document.getElementById("pauseOverlay").style.visibility="hidden"	
+		game.ui.toRunFunction=function () {		
 			document.getElementById("gameBox").style.display="none"
 			document.getElementById("menu").style.display="inline"
 			game.ui.currentBoardId="menu"
+			game.ui.drawScore("")
 		}
 		document.getElementById("box").style.backgroundColor=game.color
 	}
 	
 	var replay=function () {
+		document.getElementById("pauseOverlay").style.opacity="0"
+		document.getElementById("pauseOverlay").style.visibility="hidden"
 			game.ui.toRunFunction=function () {
-			document.getElementById("pauseOverlay").style.display="none"
 			game.reset()
 		}
 		document.getElementById("box").style.backgroundColor=game.color
 	}
 	
 	var continueGame=function () {
-		document.getElementById("pauseOverlay").style.display="none"
+			document.getElementById("pauseOverlay").style.opacity="0"
+			document.getElementById("pauseOverlay").style.visibility="hidden"	
 		game.noInputDuring=0
 		game.loop()
 	}
@@ -70,7 +74,28 @@ Game.prototype.setUI=function() {
 	
 	this.ui={
 		currentBoardId:"menu",
-		toRunFunction:undefined,
+		toRunFunction:undefined
+	}
+	
+	this.ui.drawScore=function(score) {
+		var scoreBox=document.getElementById("score")
+		score+=""
+		scoreBox.innerHTML=""
+		var width=16
+		for (var i = 0; i < score.length; i++) {
+			var div=document.createElement("div")
+			div.className="number number"+score[i]+""
+			scoreBox.appendChild(div)
+			if (score[i]=="1") {
+				width+=32
+			} else {
+				width+=64
+			}
+		}
+		scoreBox.style.width=width+"px"
+		if (width>game.groundSize) {
+			scoreBox.style.zoom=game.groundSize/width+""
+		} else {scoreBox.style.zoom="1"}
 	}
 	
 }

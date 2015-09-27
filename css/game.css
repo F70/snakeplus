@@ -8,15 +8,16 @@ html,body {margin:0;height:100%}
 .button:active::before {opacity:1}
 
 #box {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;background-color:rgba(0,0,0,0);transition:all 250ms}
-#gameBox,#snakeArea,#menu,#setting,#credit,#pauseOverlay {width:100%;height:100%;position:absolute}
-#setting,#credit,#score,#pauseOverlay,#gameBox {display:none}
-#pauseOverlay {transition:all 250ms;background-color:rgba(0,0,0,0.5);z-index:3}
+#gameBox,#snakeArea,#menu,#setting,#credit,#pauseOverlay,#score {width:100%;height:100%;position:absolute}
+#setting,#credit,#died,#gameBox {display:none}
+#pauseOverlay {transition:all 250ms;background-color:rgba(0,0,0,0.5);z-index:3;visibility:hidden;opacity:0}
 #uiBox {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:256px;height:256px;z-index:2}
 #snakeArea {z-index:0}
 #food {width:24px;height:24px;position:absolute;top:0;left:0;z-index:1;background-color:#F70}
+#score {z-index:-1;top:0;bottom:0;left:0;right:0;margin:auto;opacity:0.5;height:80px}
 
 /*menu*/
-#title {position:absolute;top:16px;left:18px;width:224px;height:32px;background-image:url(../img/title.svg);background-size:224px}
+#title {position:absolute;top:16px;left:18px;width:224px;height:32px;background-image:url(../img/title.svg);background-size:224px;background-repeat:no-repeat}
 #buttonsInMenu {position:absolute;bottom:16px;left:0;right:0;width:182px;margin:auto;height:42px}
 #playButton {width:80px;background-image:url(../img/play.svg)}
 #settingButton {margin-left:8px;background-image:url(../img/setting.svg)}
@@ -33,3 +34,19 @@ html,body {margin:0;height:100%}
 
 /*credit*/
 #backToMenuFromCreditButton {border:none;position:absolute;top:0;left:0;background-image:url(../img/back.svg)}
+
+/*died*/
+
+/*score*/
+.number {float:left;height:80px;width:48px;margin-right:16px;background-image:url(../img/font.svg);background-size:608px;background-repeat:no-repeat}
+.number:first-child {margin-left:16px}
+.number1 {background-position:0px 0px;width:16px}
+.number2 {background-position:-32px 0px}
+.number3 {background-position:-96px 0px}
+.number4 {background-position:-160px 0px}
+.number5 {background-position:-224px 0px}
+.number6 {background-position:-288px 0px}
+.number7 {background-position:-352px 0px}
+.number8 {background-position:-416px 0px}
+.number9 {background-position:-480px 0px}
+.number0 {background-position:-544px 0px}
