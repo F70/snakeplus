@@ -74,7 +74,7 @@ Snake.prototype.draw=function() {
 	for (var t = 0; t < this.parts.length; t++) {
 		this.parts[t].draw()
 	}
-	if (game.canvas.getImageData(this.headPoint.x,this.headPoint.y,1,1).data[3]!=0) {
+	if (game.canvas.getImageData(Math.round(this.headPoint.x),Math.round(this.headPoint.y),1,1).data[3]!=0) {
 		game.dead=true
 	}
 	var headDirection=this.parts[this.parts.length-1].endDirection

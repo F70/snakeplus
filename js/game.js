@@ -87,7 +87,7 @@ Game.prototype.resetFood=function () {
 		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 	}
-	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2&&game.canvas.getImageData(this.foodPoint.x,this.foodPoint.y,1,1).data[3]!=0);
+	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2&&game.canvas.getImageData(Math.round(this.foodPoint.x),Math.round(this.foodPoint.y),1,1).data[3]!=0);
 	
 	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
 	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
