@@ -49,6 +49,7 @@ Game.prototype.loop=function() {
 		this.score++
 		this.resetFood()
 		this.snake.ungrownLength+=this.growthPerFood
+		this.ui.drawScore(this.score)
 	}
 	if (this.noInputDuring>this.groundSize*this.groundSize/this.snakeSpeed/this.snakeWidth) {
 			document.getElementById("pauseOverlay").style.visibility="visible"
@@ -75,6 +76,7 @@ Game.prototype.reset=function() {
 	this.resetFoodWhenRestart()
 	this.loop()
 	this.noInputDuring=0
+	this.ui.drawScore(this.score)
 
 }
 
