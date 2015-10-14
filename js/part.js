@@ -156,6 +156,9 @@ Part.prototype.draw=function() {
 				game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(game.snake.width/2)+i*game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(game.snake.width/2)+j*game.groundSize)
 				break;
 			}
+			if(!game.dead){
+				game.dead=game.canvas.isPointInPath(game.snake.headPoint.x,game.snake.headPoint.y)	
+			}
 			game.canvas.fillStyle=game.color
 			game.canvas.fill()
 			game.canvas.closePath()

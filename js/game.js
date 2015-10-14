@@ -42,7 +42,6 @@ Game.prototype.loop=function() {
 		return
 	}
 	this.noInputDuring++
-	console.log(this.noInputDuring)
 	this.snake.move(this.input.keyRight-this.input.keyLeft)
 	this.snake.draw()
 	if (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2) {
