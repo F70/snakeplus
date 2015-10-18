@@ -8,7 +8,10 @@ function Part(length,startPoint,startDirection,partType) {
 	
 	this.length=length
 	this.partType=partType //0=straight 1=clockwise -1=anticlockwise
-	this.startPoint=Object.clone(startPoint)
+	this.startPoint={
+		x:startPoint.x,
+		y:startPoint.y
+	}
 	this.startDirection=startDirection//0=right pi/2=down
 	
 	if (this.startPoint.x>=game.groundSize) {
