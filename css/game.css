@@ -7,7 +7,7 @@ html,body {margin:0;height:100%}
 .button:hover::before {opacity:0.5}
 .button:active::before {opacity:1}
 
-#box {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;background-color:rgba(0,0,0,0);transition:all 250ms}
+#box {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;background-color:#F70;opacity:0;transition:all 250ms}
 #gameBox,#snakeArea,#menu,#setting,#credit,#pauseOverlay,#score {width:100%;height:100%;position:absolute}
 #setting,#credit,#died,#gameBox {display:none}
 #pauseOverlay {transition:all 250ms;background-color:rgba(0,0,0,0.5);z-index:3;visibility:hidden;opacity:0}

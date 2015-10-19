@@ -74,7 +74,7 @@ Game.prototype.setUI=function() {
 	
 	this.ui={
 		currentBoardId:"menu",
-		toRunFunction:undefined
+		toRunFunction:function(){}
 	}
 	
 	this.ui.drawScore=function(score) {
