@@ -7,14 +7,15 @@ html,body {margin:0;height:100%}
 .button:hover::before {opacity:0.5}
 .button:active::before {opacity:1}
 
-#box {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;background-color:rgba(0,0,0,0);transition:all 250ms}
+#box {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;opacity:0;transition:all 250ms}
+#transitionBox {top:0;bottom:0;left:0;right:0;position:absolute;background-color:#F70;transition:all 250ms;z-index:1}
 #gameBox,#snakeArea,#menu,#setting,#credit,#pauseOverlay,#score {width:100%;height:100%;position:absolute}
 #setting,#credit,#died,#gameBox {display:none}
-#pauseOverlay {transition:all 250ms;background-color:rgba(0,0,0,0.5);z-index:3;visibility:hidden;opacity:0}
-#uiBox {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:256px;height:256px;z-index:2}
+#pauseOverlay {transition:all 250ms;background-color:rgba(0,0,0,0.5);z-index:4;visibility:hidden;opacity:0}
+#uiBox {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:256px;height:256px;z-index:3}
 #snakeArea {z-index:0}
 #food {width:24px;height:24px;position:absolute;top:0;left:0;z-index:1;background-color:#F70}
-#score {z-index:-1;top:0;bottom:0;left:0;right:0;margin:auto;opacity:0.5;height:80px}
+#score {z-index:2;top:0;bottom:0;left:0;right:0;margin:auto;opacity:0.5;height:80px}
 
 /*menu*/
 #title {position:absolute;top:16px;left:18px;width:224px;height:32px;background-image:url(../img/title.svg);background-size:224px;background-repeat:no-repeat}

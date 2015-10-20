@@ -1,6 +1,7 @@
-function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpeed,snakeTurningRadius,foodSize,growthPerFood) {
+function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpeed,snakeTurningRadius,foodSize,growthPerFood,wallNumber,wallTexture) {
 	
 	this.canvas=document.getElementById(canvasId).getContext("2d")
+	this.canvas.imageSmoothingEnabled=false
 	this.groundSize=groundSize
 	this.color=color
 	this.loopId=null
@@ -17,15 +18,12 @@ function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpee
 	
 	this.foodSize=foodSize
 	
-	do {
-		this.foodPoint={
-		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
-		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
-	}
-	} while (this.foodPoint.x>=(this.groundSize-this.snakeWidth-this.originalSnakeLength)/2&&this.foodPoint.x<=(this.groundSize+this.snakeWidth+this.originalSnakeLength)/2&&this.foodPoint.y>=(this.groundSize+this.snakeWidth)/2&&this.foodPoint.y<=(this.groundSize-this.snakeWidth)/2);
-	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
-	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
 	this.growthPerFood=growthPerFood
+	
+	this.wall=wallList[wallNumber]
+	var textureImage=new Image()
+	textureImage.src=wallTexture
+	this.wallTexture=this.canvas.createPattern(textureImage,"repeat")
 	
 	this.score=0
 	this.noInputDuring=0
@@ -42,9 +40,15 @@ Game.prototype.loop=function() {
 		return
 	}
 	this.noInputDuring++
-	console.log(this.noInputDuring)
 	this.snake.move(this.input.keyRight-this.input.keyLeft)
+	this.canvas.clearRect(0,0,game.groundSize,game.groundSize)
+	for (var i=0;i<this.wall.length;i++) {
+		this.wall[i].draw()
+	}
 	this.snake.draw()
+	if(this.foodPoint==undefined){
+		this.resetFood()
+	}
 	if (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2) {
 		this.score++
 		this.resetFood()
@@ -73,7 +77,7 @@ Game.prototype.reset=function() {
 	this.score=0
 	this.dead=false
 	this.setSnake()
-	this.resetFoodWhenRestart()
+	this.foodPoint=undefined
 	this.loop()
 	this.noInputDuring=0
 	this.ui.drawScore(this.score)
@@ -87,21 +91,7 @@ Game.prototype.resetFood=function () {
 		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 	}
-	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2&&game.canvas.getImageData(this.foodPoint.x,this.foodPoint.y,1,1).data[3]!=0);
-	
-	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
-	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
-	
-}
-
-Game.prototype.resetFoodWhenRestart=function () {
-	
-	do {
-		this.foodPoint={
-		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
-		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
-	}
-	} while (this.foodPoint.x>=(this.groundSize-this.snakeWidth-this.originalSnakeLength)/2&&this.foodPoint.x<=(this.groundSize+this.snakeWidth+this.originalSnakeLength)/2&&this.foodPoint.y>=(this.groundSize+this.snakeWidth)/2&&this.foodPoint.y<=(this.groundSize-this.snakeWidth)/2);
+	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2&&game.canvas.getImageData(Math.round(this.foodPoint.x),Math.round(this.foodPoint.y),1,1).data[3]!=0);
 	
 	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
 	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"

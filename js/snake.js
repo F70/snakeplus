@@ -14,7 +14,7 @@ function Snake(length,width,speed,turningRadius) {
 Snake.prototype.extend=function(length,extendType) {
 	
 	if (extendType!=this.parts[this.parts.length-1].partType||length+this.parts[this.parts.length-1].length>game.groundSize-this.width) {
-		var newStartPoint=Object.clone(this.parts[this.parts.length-1].endPoint)
+		var newStartPoint={x:this.parts[this.parts.length-1].endPoint.x,y:this.parts[this.parts.length-1].endPoint.y}
 		if (newStartPoint.x<0) {
 			newStartPoint.x+=game.groundSize
 		} else if (newStartPoint.x>=game.groundSize) {
@@ -70,13 +70,10 @@ Snake.prototype.move=function(moveType) {
 
 Snake.prototype.draw=function() {
 	
-	game.canvas.clearRect(0,0,game.groundSize,game.groundSize)
 	for (var t = 0; t < this.parts.length; t++) {
 		this.parts[t].draw()
 	}
-	if (game.canvas.getImageData(this.headPoint.x,this.headPoint.y,1,1).data[3]!=0) {
-		game.dead=true
-	}
+
 	var headDirection=this.parts[this.parts.length-1].endDirection
 	for (var i=-1;i<2;i++) {
 		for (var j=-1;j<2;j++) {

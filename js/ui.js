@@ -5,7 +5,8 @@ Game.prototype.setUI=function() {
 			game.begin()
 			document.getElementById(game.ui.currentBoardId).style.display="none"
 		}
-		document.getElementById("box").style.backgroundColor=game.color
+		document.getElementById("transitionBox").style.backgroundColor=game.color
+		game.ui.transition=true
 	}
 	
 	var backToMenuFromGame=function () {
@@ -17,7 +18,8 @@ Game.prototype.setUI=function() {
 			game.ui.currentBoardId="menu"
 			game.ui.drawScore("")
 		}
-		document.getElementById("box").style.backgroundColor=game.color
+		document.getElementById("transitionBox").style.backgroundColor=game.color
+		game.ui.transition=true		
 	}
 	
 	var replay=function () {
@@ -26,7 +28,8 @@ Game.prototype.setUI=function() {
 			game.ui.toRunFunction=function () {
 			game.reset()
 		}
-		document.getElementById("box").style.backgroundColor=game.color
+		document.getElementById("transitionBox").style.backgroundColor=game.color
+		game.ui.transition=true		
 	}
 	
 	var continueGame=function () {
@@ -51,7 +54,8 @@ Game.prototype.setUI=function() {
 				}
 				game.ui.currentBoardId=boardId
 			}
-			document.getElementById("box").style.backgroundColor=game.color
+			document.getElementById("transitionBox").style.backgroundColor=game.color
+			game.ui.transition=true			
 		}
 	}
 	
@@ -66,15 +70,26 @@ Game.prototype.setUI=function() {
 	
 	
 	document.getElementById("box").addEventListener("transitionend",function (event) {
-		if (event.currentTarget.style.backgroundColor==getComputedStyle(document.getElementById("box")).borderColor) {
+		if (!game.ui.started) {
+			game.ui.started=true
 			game.ui.toRunFunction()
-			document.getElementById("box").style.backgroundColor="rgba(0,0,0,0)"
+			document.getElementById("transitionBox").style.backgroundColor="rgba(0,0,0,0)"
+		}
+	},false)
+	document.getElementById("transitionBox").addEventListener("transitionend",function (event) {
+		if (game.ui.transition) {
+			game.ui.transition=false
+			game.ui.toRunFunction()
+			document.getElementById("transitionBox").style.backgroundColor="rgba(0,0,0,0)"
 		}
 	},false)
 	
+	
 	this.ui={
 		currentBoardId:"menu",
-		toRunFunction:undefined
+		started:false,
+		transition:false,
+		toRunFunction:function(){}
 	}
 	
 	this.ui.drawScore=function(score) {
