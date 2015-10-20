@@ -70,13 +70,10 @@ Snake.prototype.move=function(moveType) {
 
 Snake.prototype.draw=function() {
 	
-	game.canvas.clearRect(0,0,game.groundSize,game.groundSize)
 	for (var t = 0; t < this.parts.length; t++) {
 		this.parts[t].draw()
 	}
-	//if (game.canvas.getImageData(Math.round(this.headPoint.x),Math.round(this.headPoint.y),1,1).data[3]!=0) {
-	//	game.dead=true
-	//}
+
 	var headDirection=this.parts[this.parts.length-1].endDirection
 	for (var i=-1;i<2;i++) {
 		for (var j=-1;j<2;j++) {
