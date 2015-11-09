@@ -20,7 +20,7 @@ function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpee
 	
 	this.growthPerFood=growthPerFood
 	
-	this.wall=wallList[wallNumber]
+	this.changeWall(wallNumber)
 	var textureImage=new Image()
 	textureImage.src=wallTexture
 	this.wallTexture=this.canvas.createPattern(textureImage,"repeat")
@@ -37,6 +37,9 @@ Game.prototype.setSnake=function() {
 Game.prototype.loop=function() {
 	
 	if (this.dead==true) {
+		game.input.keyLeft=0
+		game.input.keyRight=0
+		this.ui.goToScore()
 		return
 	}
 	this.noInputDuring++
@@ -86,12 +89,21 @@ Game.prototype.reset=function() {
 
 Game.prototype.resetFood=function () {
 	
+	function checkValid(){
+		var answer=Math.abs(game.snake.headPoint.x-game.foodPoint.x)<game.foodSize/2||Math.abs(game.snake.headPoint.y-game.foodPoint.y)<game.foodSize/2
+		answer=answer||game.canvas.getImageData(Math.round(game.foodPoint.x+game.foodSize/2),Math.round(game.foodPoint.y+game.foodSize/2),1,1).data[3]!=0
+		answer=answer||game.canvas.getImageData(Math.round(game.foodPoint.x-game.foodSize/2),Math.round(game.foodPoint.y+game.foodSize/2),1,1).data[3]!=0
+		answer=answer||game.canvas.getImageData(Math.round(game.foodPoint.x+game.foodSize/2),Math.round(game.foodPoint.y-game.foodSize/2),1,1).data[3]!=0
+		answer=answer||game.canvas.getImageData(Math.round(game.foodPoint.x-game.foodSize/2),Math.round(game.foodPoint.y-game.foodSize/2),1,1).data[3]!=0
+		return answer
+	}
+	
 	do {
 		this.foodPoint={
 		x:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 		y:this.foodSize/2+Math.random()*(this.groundSize-this.foodSize),
 	}
-	} while (Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2&&Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2&&game.canvas.getImageData(Math.round(this.foodPoint.x),Math.round(this.foodPoint.y),1,1).data[3]!=0);
+	} while (checkValid())
 	
 	document.getElementById("food").style.left=this.foodPoint.x-this.foodSize/2+"px"
 	document.getElementById("food").style.top=this.foodPoint.y-this.foodSize/2+"px"
@@ -106,4 +118,12 @@ Game.prototype.begin=function () {
 Game.prototype.end=function () {
 	this.pause()
 	document.getElementById("gameBox").style.display="none"
+}
+
+Game.prototype.changeWall=function (wallNumber) {
+	this.wall=wallList[wallNumber]
+	for (var i=0;i<wallList.length;i++) {
+		document.getElementById("wallSelector"+i).style.borderColor="rgba(0,0,0,0)"
+	}
+	document.getElementById("wallSelector"+wallNumber).style.borderColor="#f70"
 }

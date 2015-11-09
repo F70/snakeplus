@@ -1,18 +1,31 @@
+* {user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;}
+
 body,div,p {margin:0;padding:0;position:relative}
 body {font-family:arial;background-color:#000}
 html,body {margin:0;height:100%} 
 
-.button {width:40px;height:40px;border-style:solid;border-color:#f70;border-width:1px;float:left;background-repeat:no-repeat;background-position:center}
+.button {width:40px;height:40px;border-style:solid;border-color:#f70;border-width:1px;float:left;background-repeat:no-repeat;background-position:center;cursor:pointer;z-index:3}
 .button::before {content:"";position:absolute;height:100%;width:100%;background-color:#f70;transition:all 250ms;opacity:0}
 .button:hover::before {opacity:0.5}
 .button:active::before {opacity:1}
 
+.controller {width:100%;height:40px;margin-top:24px}
+.settingIcon {width:40px;height:40px;float:left}
+
+.slider {width:176px;height:40px;float:left;position:relative;z-index:auto}
+.sliderArea {width:100%;height:100%;position:absolute;z-index:3}
+.sliderLine {position:absolute;width:152px;height:1px;margin:auto;top:0;bottom:0;left:0;right:0;background-color:#f70;z-index:-2}
+.sliderButton {position:absolute;width:22px;height:22px;margin:auto;left:0;top:0;bottom:0;border-style:solid;border-color:#f70;border-width:1px;background-color:#000;z-index:-1;transition:left 100ms cubic-bezier(0,1,0,1);left:76px}
+.sliderArea~.sliderButton::before {content:"";position:absolute;height:100%;width:100%;background-color:#f70;transition:all 250ms;opacity:0}
+.sliderArea:hover~.sliderButton::before {opacity:0.5}
+.sliderArea:active~.sliderButton::before {opacity:1}
+
 #box {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:384px;height:384px;border-style:solid;border-width:1px;border-color:#f70;opacity:0;transition:all 250ms}
 #transitionBox {top:0;bottom:0;left:0;right:0;position:absolute;background-color:#F70;transition:all 250ms;z-index:1}
-#gameBox,#snakeArea,#menu,#setting,#credit,#pauseOverlay,#score {width:100%;height:100%;position:absolute}
+#gameBox,#snakeArea,#menu,#setting,#credit,#pauseOverlay,#score,#died {width:100%;height:100%;position:absolute}
 #setting,#credit,#died,#gameBox {display:none}
 #pauseOverlay {transition:all 250ms;background-color:rgba(0,0,0,0.5);z-index:4;visibility:hidden;opacity:0}
-#uiBox {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:256px;height:256px;z-index:3}
+#uiBox {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;width:256px;height:256px;z-index:auto}
 #snakeArea {z-index:0}
 #food {width:24px;height:24px;position:absolute;top:0;left:0;z-index:1;background-color:#F70}
 #score {z-index:2;top:0;bottom:0;left:0;right:0;margin:auto;opacity:0.5;height:80px}
@@ -32,11 +45,29 @@ html,body {margin:0;height:100%}
 
 /*setting*/
 #backToMenuFromSettingButton {border:none;position:absolute;top:0;left:0;background-image:url(../img/back.svg)}
+#settingList {top:0;bottom:0;left:0;right:0;margin:auto;position:absolute;height:104px}
+#settingList>.controller:first-child {margin-top:0}
+#wallIcon {background-image:url(../img/wallicon.svg)}
+.wallSelector {height:38px;width:38px;margin-left:3.2px;float:left;border-style:solid;border-color:rgba(0,0,0,0);border-width:1px;transition:all 250ms;cursor:pointer;z-index:3}
+.wallSelector::before {content:"";position:absolute;height:100%;width:100%;background-color:#f70;transition:all 250ms;opacity:0}
+.wallSelector:hover::before {opacity:0.5}
+.wallSelector:active::before {opacity:1}
+.wallImage {height:24px;width:24px;margin:7px;background-image:url(../img/walllist.svg)}
+#wallImage0 {background-position:0px 0px}
+#wallImage1 {background-position:-28px 0px}
+#wallImage2 {background-position:-56px 0px}
+#wallImage3 {background-position:-84px 0px}
+#wallImage4 {background-position:-112px 0px}
+#lowSpeedIcon {background-image:url(../img/snakespeed.svg);background-position:0px 0px}
+#highSpeedIcon {background-image:url(../img/snakespeed.svg);background-position:-40px 0px}
 
 /*credit*/
 #backToMenuFromCreditButton {border:none;position:absolute;top:0;left:0;background-image:url(../img/back.svg)}
 
 /*died*/
+#buttonsInDied {position:absolute;bottom:56px;left:0;right:0;width:92px;margin:auto;height:42px}
+#backToMenuFromDiedButton {background-image:url(../img/back.svg)}
+#tryAgainButton {margin-left:8px;background-image:url(../img/reset.svg)}
 
 /*score*/
 .number {float:left;height:80px;width:48px;margin-right:16px;background-image:url(../img/font.svg);background-size:608px;background-repeat:no-repeat}

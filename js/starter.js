@@ -1,5 +1,5 @@
 var game
-var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg","img/reset.svg","img/setting.svg","img/title.svg","img/wall.svg"]
+var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg","img/reset.svg","img/setting.svg","img/title.svg","img/snakespeed.svg","img/wallicon.svg","img/walllist.svg","img/wall.svg"]
 var imageList=[]
 var loadedImageNumber=0
 
