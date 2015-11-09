@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="play.svg">
+   sodipodi:docname="reset.svg">
   <defs
      id="defs4">
     <inkscape:path-effect
@@ -31,8 +31,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="11.996795"
-     inkscape:cy="19.738313"
+     inkscape:cx="320"
+     inkscape:cy="18.738313"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -67,7 +67,6 @@
        d="m 32,8 0,7.029437 -7.029437,0 z"
        id="path4138"
        inkscape:path-effect="#path-effect4140"
-       inkscape:original-d="m 33.916667,12.333333 -12,8.833334 11.5,-0.666667 z"
        inkscape:connector-curvature="0" />
   </g>
 </svg>

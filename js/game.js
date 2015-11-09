@@ -20,7 +20,7 @@ function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpee
 	
 	this.growthPerFood=growthPerFood
 	
-	this.wall=wallList[wallNumber]
+	this.changeWall(wallNumber)
 	var textureImage=new Image()
 	textureImage.src=wallTexture
 	this.wallTexture=this.canvas.createPattern(textureImage,"repeat")
@@ -118,4 +118,12 @@ Game.prototype.begin=function () {
 Game.prototype.end=function () {
 	this.pause()
 	document.getElementById("gameBox").style.display="none"
+}
+
+Game.prototype.changeWall=function (wallNumber) {
+	this.wall=wallList[wallNumber]
+	for (var i=0;i<wallList.length;i++) {
+		document.getElementById("wallSelector"+i).style.borderColor="rgba(0,0,0,0)"
+	}
+	document.getElementById("wallSelector"+wallNumber).style.borderColor="#f70"
 }
