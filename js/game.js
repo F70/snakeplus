@@ -1,8 +1,9 @@
-function Game(canvasId,groundSize,color,originalSnakeLength,snakeWidth,snakeSpeed,snakeTurningRadius,foodSize,growthPerFood,wallNumber,wallTexture) {
+function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,snakeSpeed,snakeTurningRadius,foodSize,growthPerFood,wallNumber,wallTexture) {
 	
 	this.canvas=document.getElementById(canvasId).getContext("2d")
 	this.canvas.imageSmoothingEnabled=false
 	this.groundSize=groundSize
+	this.zoomRate=zoomRate
 	this.color=color
 	this.loopId=null
 	this.input={

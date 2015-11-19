@@ -3,8 +3,28 @@ var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg",
 var imageList=[]
 var loadedImageNumber=0
 
+var resetViewport=function () {
+	var size=Math.min(screen.width,screen.height)
+	var scale
+	if(size<512){
+		scale=512
+	}else if(size<640){
+		scale=640
+	}else{
+		scale=768
+	}
+	if(screen.width>screen.height){
+		document.getElementById("viewport").setAttribute("content", "width="+(scale*innerWidth)/innerHeight+",height="+scale+",user-scalable=no")
+	}else{
+		document.getElementById("viewport").setAttribute("content", "width="+scale+",user-scalable=no")		
+	}
+}
+
+addEventListener("resize",resetViewport,false)
+resetViewport()
+
 function loadGame() {
-	game=new Game("snakeArea",384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
+	game=new Game("snakeArea",1,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
 	game.setSnake()
 	game.setController()
 	game.setUI()
