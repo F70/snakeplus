@@ -1,32 +1,32 @@
 //snake
 function Snake(length,width,speed,turningRadius,currentGame) {
 	
+	this.game=currentGame
 	this.length=length
 	this.width=width
 	this.speed=speed
 	this.turningRadius=turningRadius
-	this.parts=[new Part(this.length,{x:game.groundSize/2,y:game.groundSize/2+this.width/2+this.length/2},-Math.PI/2,0)]
-	this.headPoint={x:game.groundSize/2,y:game.groundSize/2-this.width/2-this.length/2}
+	this.parts=[new Part(this.length,{x:this.game.groundSize/2,y:this.game.groundSize/2+this.width/2+this.length/2},-Math.PI/2,0,this)]
+	this.headPoint={x:this.game.groundSize/2,y:this.game.groundSize/2-this.width/2-this.length/2}
 	this.ungrownLength=0
-	this.game=currentGame
 	
 }
 
 Snake.prototype.extend=function(length,extendType) {
 	
-	if (extendType!=this.parts[this.parts.length-1].partType||length+this.parts[this.parts.length-1].length>game.groundSize-this.width) {
+	if (extendType!=this.parts[this.parts.length-1].partType||length+this.parts[this.parts.length-1].length>this.game.groundSize-this.width) {
 		var newStartPoint={x:this.parts[this.parts.length-1].endPoint.x,y:this.parts[this.parts.length-1].endPoint.y}
 		if (newStartPoint.x<0) {
-			newStartPoint.x+=game.groundSize
-		} else if (newStartPoint.x>=game.groundSize) {
-			newStartPoint.x-=game.groundSize
+			newStartPoint.x+=this.game.groundSize
+		} else if (newStartPoint.x>=this.game.groundSize) {
+			newStartPoint.x-=this.game.groundSize
 		} 
 		if (newStartPoint.y<0) {
-			newStartPoint.y+=game.groundSize
-		} else if (newStartPoint.y>=game.groundSize) {
-			newStartPoint.y-=game.groundSize
+			newStartPoint.y+=this.game.groundSize
+		} else if (newStartPoint.y>=this.game.groundSize) {
+			newStartPoint.y-=this.game.groundSize
 		}
-		this.parts.push(new Part(length,newStartPoint,this.parts[this.parts.length-1].endDirection,extendType))
+		this.parts.push(new Part(length,newStartPoint,this.parts[this.parts.length-1].endDirection,extendType,this))
 	} else {
 		this.parts[this.parts.length-1].extend(length)
 	}
@@ -35,14 +35,14 @@ Snake.prototype.extend=function(length,extendType) {
 		y:this.parts[this.parts.length-1].endPoint.y+this.width*Math.sin(this.parts[this.parts.length-1].endDirection),
 	}
 	if (this.headPoint.x<0) {
-			this.headPoint.x+=game.groundSize
-		} else if (this.headPoint.x>=game.groundSize) {
-			this.headPoint.x-=game.groundSize
+			this.headPoint.x+=this.game.groundSize
+		} else if (this.headPoint.x>=this.game.groundSize) {
+			this.headPoint.x-=this.game.groundSize
 		} 
 		if (this.headPoint.y<0) {
-			this.headPoint.y+=game.groundSize
-		} else if (this.headPoint.y>=game.groundSize) {
-			this.headPoint.y-=game.groundSize
+			this.headPoint.y+=this.game.groundSize
+		} else if (this.headPoint.y>=this.game.groundSize) {
+			this.headPoint.y-=this.game.groundSize
 		}
 	
 }
@@ -79,20 +79,20 @@ Snake.prototype.draw=function() {
 	for (var i=-1;i<2;i++) {
 		for (var j=-1;j<2;j++) {
 			
-			game.canvas.moveTo(this.headPoint.x+i*game.groundSize,this.headPoint.y+j*game.groundSize)
-			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
-			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
-			game.canvas.fillStyle=game.color
-			game.canvas.fill()
-			game.canvas.closePath()
-			game.canvas.beginPath()
-			game.canvas.lineWidth=1
-			game.canvas.strokeStyle=game.color
-			game.canvas.moveTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
-			game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*game.groundSize)
-			game.canvas.stroke()
-			game.canvas.closePath()
-			game.canvas.beginPath()
+			this.game.canvas.moveTo(this.headPoint.x+i*this.game.groundSize,this.headPoint.y+j*this.game.groundSize)
+			this.game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
+			this.game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
+			this.game.canvas.fillStyle=this.game.color
+			this.game.canvas.fill()
+			this.game.canvas.closePath()
+			this.game.canvas.beginPath()
+			this.game.canvas.lineWidth=1
+			this.game.canvas.strokeStyle=this.game.color
+			this.game.canvas.moveTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
+			this.game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
+			this.game.canvas.stroke()
+			this.game.canvas.closePath()
+			this.game.canvas.beginPath()
 			
 		}
 	}
