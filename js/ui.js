@@ -34,18 +34,14 @@ Game.prototype.setUI=function(){
 	
 	var jumpToBoardFunctionGenerator=function(boardId){
 		return function(){
-			
-			if (boardId==this.ui.currentBoardId){
-				return
-			}
-			
+			if(boardId==this.ui.currentBoardId){return}
 			this.ui.toRunFunction=function(){
 				this.ui.drawScore("")
 				document.getElementById("score").style.cssText=""
-				if (document.getElementById(this.ui.currentBoardId)!=undefined){
+				if(document.getElementById(this.ui.currentBoardId)!=undefined){
 					document.getElementById(this.ui.currentBoardId).style.display="none"
 				}
-				if (document.getElementById(boardId)!=undefined){
+				if(document.getElementById(boardId)!=undefined){
 					document.getElementById(boardId).style.display="inline"
 				}
 				this.ui.currentBoardId=boardId
@@ -61,9 +57,7 @@ Game.prototype.setUI=function(){
 		}.bind(this)
 	}.bind(this)
 
-	var positionGenerator=function(x){
-		return Math.max(12,Math.min(164,x))-12
-	}
+	var positionGenerator=function(x){return Math.max(12,Math.min(164,x))-12}
 	
 	var changeSpeedDown=function(event){
 		if(event.button==0){
@@ -77,7 +71,7 @@ Game.prototype.setUI=function(){
 	}.bind(this)
 	
 	var changeSpeedMove=function(event){
-		if (this.ui.speedSliderMouseStartPoint!=event.screenX){
+		if(this.ui.speedSliderMouseStartPoint!=event.screenX){
 			document.getElementById("speedSliderButton").style.transition="none"
 			document.getElementById("speedSliderButton").style.left=positionGenerator(event.screenX-this.ui.speedSliderLeft)+"px"
 			this.snakeSpeed=1+positionGenerator(event.screenX-this.ui.speedSliderLeft)/38
@@ -90,7 +84,6 @@ Game.prototype.setUI=function(){
 		this.snakeSpeed=1+positionGenerator(event.screenX-this.ui.speedSliderLeft)/38		
 		removeEventListener("mousemove",changeSpeedMove)
 		removeEventListener("mouseup",changeSpeedUp)
-		
 	}.bind(this)
 	
 	document.getElementById("playButton").addEventListener("click",turnToGame,false)
@@ -105,19 +98,19 @@ Game.prototype.setUI=function(){
 	document.getElementById("backToMenuFromCreditButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
 	document.getElementById("speedSliderArea").addEventListener("mousedown",changeSpeedDown,false)
 	
-	for (var i=0;i<5;i++){
+	for(var i=0;i<5;i++){
 		document.getElementById("wallSelector"+i).addEventListener("click",chooseWallFunctionGenerator(i),false)
 	}
 	
-	document.getElementById("box").addEventListener("transitionend",function (event){
-		if (!this.ui.started){
+	document.getElementById("box").addEventListener("transitionend",function(event){
+		if(!this.ui.started){
 			this.ui.started=true
 			this.ui.toRunFunction()
 			document.getElementById("transitionBox").style.backgroundColor="rgba(0,0,0,0)"
 		}
 	}.bind(this),false)
-	document.getElementById("transitionBox").addEventListener("transitionend",function (event){
-		if (this.ui.transition){
+	document.getElementById("transitionBox").addEventListener("transitionend",function(event){
+		if(this.ui.transition){
 			this.ui.transition=false
 			this.ui.toRunFunction()
 			document.getElementById("transitionBox").style.backgroundColor="rgba(0,0,0,0)"
@@ -137,20 +130,20 @@ Game.prototype.setUI=function(){
 		score+=""
 		scoreBox.innerHTML=""
 		var width=16
-		for (var i = 0; i < score.length; i++){
+		for(var i=0;i<score.length;i++){
 			var div=document.createElement("div")
 			div.className="number number"+score[i]+""
 			scoreBox.appendChild(div)
-			if (score[i]=="1"){
+			if(score[i]=="1"){
 				width+=32
-			} else {
+			}else{
 				width+=64
 			}
 		}
 		scoreBox.style.width=width+"px"
-		if (width>this.groundSize){
+		if(width>this.groundSize){
 			scoreBox.style.zoom=this.groundSize/width+""
-		} else {scoreBox.style.zoom="1"}
+		}else{scoreBox.style.zoom="1"}
 	}
 	
 	this.ui.goToScore=function(){
@@ -165,6 +158,5 @@ Game.prototype.setUI=function(){
 			document.getElementById("transitionBox").style.backgroundColor=this.color
 			this.ui.transition=true
 		}.bind(this),500)
-		
 	}.bind(this)
 }

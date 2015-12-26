@@ -1,17 +1,16 @@
-function Wall(verticesList) {
+function Wall(verticesList){
 	this.verticesList=verticesList
 }
 
-Wall.prototype.draw=function(currentGame) {
+Wall.prototype.draw=function(currentGame){
 	currentGame.canvas.moveTo(this.verticesList[0].x,this.verticesList[0].y)
-	for (var i=0;i<this.verticesList.length;i++) {
+	for(var i=0;i<this.verticesList.length;i++){
 		currentGame.canvas.lineTo(this.verticesList[i].x,this.verticesList[i].y)
 	}
 	currentGame.canvas.lineTo(this.verticesList[0].x,this.verticesList[0].y)
 	if(!currentGame.dead){
 		currentGame.dead=currentGame.canvas.isPointInPath(currentGame.snake.headPoint.x,currentGame.snake.headPoint.y)	
 	}
-
 	currentGame.canvas.fillStyle=currentGame.wallTexture	
 	currentGame.canvas.fill()
 	currentGame.canvas.lineWidth=1
