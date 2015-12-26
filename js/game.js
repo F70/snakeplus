@@ -32,7 +32,7 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 }
 
 Game.prototype.setSnake=function() {
-	this.snake=new Snake(this.originalSnakeLength,this.snakeWidth,this.snakeSpeed,this.snakeTurningRadius)
+	this.snake=new Snake(this.originalSnakeLength,this.snakeWidth,this.snakeSpeed,this.snakeTurningRadius,this)
 }
 
 Game.prototype.loop=function() {
@@ -47,7 +47,7 @@ Game.prototype.loop=function() {
 	this.snake.move(this.input.keyRight-this.input.keyLeft)
 	this.canvas.clearRect(0,0,game.groundSize,game.groundSize)
 	for (var i=0;i<this.wall.length;i++) {
-		this.wall[i].draw()
+		this.wall[i].draw(this)
 	}
 	this.snake.draw()
 	if(this.foodPoint==undefined){

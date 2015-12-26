@@ -2,23 +2,23 @@ function Wall(verticesList) {
 	this.verticesList=verticesList
 }
 
-Wall.prototype.draw=function() {
-	game.canvas.moveTo(this.verticesList[0].x,this.verticesList[0].y)
+Wall.prototype.draw=function(currentGame) {
+	currentGame.canvas.moveTo(this.verticesList[0].x,this.verticesList[0].y)
 	for (var i=0;i<this.verticesList.length;i++) {
-		game.canvas.lineTo(this.verticesList[i].x,this.verticesList[i].y)
+		currentGame.canvas.lineTo(this.verticesList[i].x,this.verticesList[i].y)
 	}
-	game.canvas.lineTo(this.verticesList[0].x,this.verticesList[0].y)
-	if(!game.dead){
-		game.dead=game.canvas.isPointInPath(game.snake.headPoint.x,game.snake.headPoint.y)	
+	currentGame.canvas.lineTo(this.verticesList[0].x,this.verticesList[0].y)
+	if(!currentGame.dead){
+		currentGame.dead=currentGame.canvas.isPointInPath(currentGame.snake.headPoint.x,currentGame.snake.headPoint.y)	
 	}
 
-	game.canvas.fillStyle=game.wallTexture	
-	game.canvas.fill()
-	game.canvas.lineWidth=1
-	game.canvas.strokeStyle=game.color
-	game.canvas.stroke()
-	game.canvas.closePath()
-	game.canvas.beginPath()
+	currentGame.canvas.fillStyle=currentGame.wallTexture	
+	currentGame.canvas.fill()
+	currentGame.canvas.lineWidth=1
+	currentGame.canvas.strokeStyle=currentGame.color
+	currentGame.canvas.stroke()
+	currentGame.canvas.closePath()
+	currentGame.canvas.beginPath()
 }
 
 var wallList=[

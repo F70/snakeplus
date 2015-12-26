@@ -1,5 +1,5 @@
 //snake
-function Snake(length,width,speed,turningRadius) {
+function Snake(length,width,speed,turningRadius,currentGame) {
 	
 	this.length=length
 	this.width=width
@@ -8,6 +8,7 @@ function Snake(length,width,speed,turningRadius) {
 	this.parts=[new Part(this.length,{x:game.groundSize/2,y:game.groundSize/2+this.width/2+this.length/2},-Math.PI/2,0)]
 	this.headPoint={x:game.groundSize/2,y:game.groundSize/2-this.width/2-this.length/2}
 	this.ungrownLength=0
+	this.game=currentGame
 	
 }
 
