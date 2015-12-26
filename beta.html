@@ -1,91 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
+		<title>Snake+ β</title>
+		<meta id="viewport" name="viewport" content="width=512,user-scalable=no" />
+		<link rel="stylesheet" href="css/game.css"></link>
+		<script src="js/part.js"></script>
+		<script src="js/snake.js"></script>
+		<script src="js/wall.js"></script>
+		<script src="js/game.js"></script>
+		<script src="js/ui.js"></script>
+		<script src="js/controller.js"></script>
+		<script src="js/starter.js"></script>
+	</head>
 
-<title>Snake+ β</title>
-<meta id="viewport" name="viewport" content="width=512,user-scalable=no" />
-<link rel="stylesheet" href="css/game.css"></link>
-<script src="js/part.js"></script>
-<script src="js/snake.js"></script>
-<script src="js/wall.js"></script>
-<script src="js/game.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/controller.js"></script>
-<script src="js/starter.js"></script>
-
-</head>
-
-<body>
-
-<div id="box">
-		
-		<div id="gameBox">
-			<canvas id="snakeArea" height="384px" width="384px"></canvas>
-			<div id="food"></div>
-		</div>
-		<div id="transitionBox"></div>
-		<div id="uiBox">
-			<div id="menu">
-				<div id="title"></div>
-				<div id="buttonsInMenu">
-					<div class="button" id="playButton"></div>
-					<div class="button" id="settingButton"></div>
-					<div class="button" id="creditButton"></div>
+	<body>
+		<div id="box">
+				
+				<div id="gameBox">
+					<canvas id="snakeArea" height="384px" width="384px"></canvas>
+					<div id="food"></div>
 				</div>
-			</div>
-			<div id="setting">
-				<div class="button" id="backToMenuFromSettingButton"></div>
-				<div id="settingList">
-					<div class="controller" id="wallController">
-						<div class="settingIcon" id="wallIcon"></div>
-						<div class="wallSelector" id="wallSelector0">
-							<div class="wallImage" id="wallImage0"></div>
-						</div>
-						<div class="wallSelector" id="wallSelector1">
-							<div class="wallImage" id="wallImage1"></div>
-						</div>
-						<div class="wallSelector" id="wallSelector2">
-							<div class="wallImage" id="wallImage2"></div>
-						</div>
-						<div class="wallSelector" id="wallSelector3">
-							<div class="wallImage" id="wallImage3"></div>
-						</div>
-						<div class="wallSelector" id="wallSelector4">
-							<div class="wallImage" id="wallImage4"></div>
+				<div id="transitionBox"></div>
+				<div id="uiBox">
+					<div id="menu">
+						<div id="title"></div>
+						<div id="buttonsInMenu">
+							<div class="button" id="playButton"></div>
+							<div class="button" id="settingButton"></div>
+							<div class="button" id="creditButton"></div>
 						</div>
 					</div>
-					<div class="controller" id="speedController">
-						<div class="settingIcon" id="lowSpeedIcon"></div>
-						<div class="slider" id="speedSlider">
-							<div class="sliderArea" id="speedSliderArea"></div>
-							<div class="sliderLine"></div>
-							<div class="sliderButton" id="speedSliderButton"></div>
+					<div id="setting">
+						<div class="button" id="backToMenuFromSettingButton"></div>
+						<div id="settingList">
+							<div class="controller" id="wallController">
+								<div class="settingIcon" id="wallIcon"></div>
+								<div class="wallSelector" id="wallSelector0">
+									<div class="wallImage" id="wallImage0"></div>
+								</div>
+								<div class="wallSelector" id="wallSelector1">
+									<div class="wallImage" id="wallImage1"></div>
+								</div>
+								<div class="wallSelector" id="wallSelector2">
+									<div class="wallImage" id="wallImage2"></div>
+								</div>
+								<div class="wallSelector" id="wallSelector3">
+									<div class="wallImage" id="wallImage3"></div>
+								</div>
+								<div class="wallSelector" id="wallSelector4">
+									<div class="wallImage" id="wallImage4"></div>
+								</div>
+							</div>
+							<div class="controller" id="speedController">
+								<div class="settingIcon" id="lowSpeedIcon"></div>
+								<div class="slider" id="speedSlider">
+									<div class="sliderArea" id="speedSliderArea"></div>
+									<div class="sliderLine"></div>
+									<div class="sliderButton" id="speedSliderButton"></div>
+								</div>
+								<div class="settingIcon" id="highSpeedIcon"></div>
+							</div>
 						</div>
-						<div class="settingIcon" id="highSpeedIcon"></div>
+					</div>
+					<div id="credit">
+						<div class="button" id="backToMenuFromCreditButton"></div>
+					</div>
+					<div id="died">
+						<div id="buttonsInDied">
+							<div class="button" id="backToMenuFromDiedButton"></div>
+							<div class="button" id="tryAgainButton"></div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="credit">
-				<div class="button" id="backToMenuFromCreditButton"></div>
-			</div>
-			<div id="died">
-				<div id="buttonsInDied">
-					<div class="button" id="backToMenuFromDiedButton"></div>
-					<div class="button" id="tryAgainButton"></div>
+				<div id="pauseOverlay">
+					<div id="buttonsInPauseOverlay">
+						<div class="button" id="backToMenuFromGameButton"></div>
+						<div class="button" id="replayButton"></div>
+						<div class="button" id="continueButton"></div>
+					</div>
 				</div>
-			</div>
+				<div id="score"></div>
+				
 		</div>
-		<div id="pauseOverlay">
-			<div id="buttonsInPauseOverlay">
-				<div class="button" id="backToMenuFromGameButton"></div>
-				<div class="button" id="replayButton"></div>
-				<div class="button" id="continueButton"></div>
-			</div>
-		</div>
-		<div id="score"></div>
-		
-</div>
-
-</body>
-
+	</body>
 </html>
