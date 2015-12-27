@@ -3,19 +3,39 @@ var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg",
 var imageList=[]
 var loadedImageNumber=0
 
-function loadGame() {
-	game=new Game("snakeArea",384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
+var resetViewport=function(){
+	var size=Math.min(screen.width,screen.height)
+	var scale
+	if(size<512){
+		scale=512
+	}else if(size<640){
+		scale=640
+	}else{
+		scale=768
+	}
+	if(screen.width>screen.height){
+		document.getElementById("viewport").setAttribute("content","width="+(scale*innerWidth)/innerHeight+",height="+scale+",user-scalable=no")
+	}else{
+		document.getElementById("viewport").setAttribute("content","width="+scale+",user-scalable=no")		
+	}
+}
+
+addEventListener("resize",resetViewport,false)
+resetViewport()
+
+function loadGame(){
+	game=new Game("snakeArea",1,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
 	game.setSnake()
 	game.setController()
 	game.setUI()
 	document.getElementById("box").style.opacity="1"
 }
 
-function imageLoader() {
-	for (var i=0;i<imageSrcList.length;i++) {
+function imageLoader(){
+	for(var i=0;i<imageSrcList.length;i++){
 		imageList.push(new Image())
 		imageList[i].src=imageSrcList[i]
-		imageList[i].onload=function() {
+		imageList[i].onload=function(){
 			loadedImageNumber++
 			console.log(this.src+" loaded")
 			if(loadedImageNumber==imageList.length){

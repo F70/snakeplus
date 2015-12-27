@@ -1,10 +1,11 @@
-//parts of game.snake
-function Part(length,startPoint,startDirection,partType) {
+//parts of this.snake.game.snake
+function Part(length,startPoint,startDirection,partType,currentSnake){
 	
-	if (partType!=-1&&partType!=1&&partType!=0) {
+	this.snake=currentSnake
+	
+	if(partType!=-1&&partType!=1&&partType!=0){
 		partType=0
 	}
-	
 	
 	this.length=length
 	this.partType=partType //0=straight 1=clockwise -1=anticlockwise
@@ -14,42 +15,42 @@ function Part(length,startPoint,startDirection,partType) {
 	}
 	this.startDirection=startDirection//0=right pi/2=down
 	
-	if (this.startPoint.x>=game.groundSize) {
-		this.startPoint.x-=game.groundSize
-	} else if(this.startPoint.x<0) {
-		this.startPoint.x+=game.groundSize
+	if(this.startPoint.x>=this.snake.game.groundSize){
+		this.startPoint.x-=this.snake.game.groundSize
+	}else if(this.startPoint.x<0){
+		this.startPoint.x+=this.snake.game.groundSize
 	}
-	if (this.startPoint.y>=game.groundSize) {
-		this.startPoint.y-=game.groundSize
-	} else if(this.startPoint.y<0) {
-		this.startPoint.y+=game.groundSize
+	if(this.startPoint.y>=this.snake.game.groundSize){
+		this.startPoint.y-=this.snake.game.groundSize
+	}else if(this.startPoint.y<0){
+		this.startPoint.y+=this.snake.game.groundSize
 	}
 	
-	switch (this.partType) {
+	switch(this.partType){
 		case 1:
 			this.arcCenter={
-				x:this.startPoint.x-game.snake.turningRadius*Math.sin(this.startDirection),
-				y:this.startPoint.y+game.snake.turningRadius*Math.cos(this.startDirection),
+				x:this.startPoint.x-this.snake.game.snake.turningRadius*Math.sin(this.startDirection),
+				y:this.startPoint.y+this.snake.game.snake.turningRadius*Math.cos(this.startDirection),
 			}
-			this.endDirection=this.startDirection+this.length/game.snake.turningRadius
-			if (this.endDirection>2*Math.PI) {this.endDirection-=2*Math.PI}
+			this.endDirection=this.startDirection+this.length/this.snake.game.snake.turningRadius
+			if(this.endDirection>2*Math.PI){this.endDirection-=2*Math.PI}
 			this.endPoint={
-				x:this.arcCenter.x+game.snake.turningRadius*Math.sin(this.endDirection),
-				y:this.arcCenter.y-game.snake.turningRadius*Math.cos(this.endDirection),
+				x:this.arcCenter.x+this.snake.game.snake.turningRadius*Math.sin(this.endDirection),
+				y:this.arcCenter.y-this.snake.game.snake.turningRadius*Math.cos(this.endDirection),
 			}
-			break;
+			break
 		case -1:
 			this.arcCenter={
-				x:this.startPoint.x+game.snake.turningRadius*Math.sin(this.startDirection),
-				y:this.startPoint.y-game.snake.turningRadius*Math.cos(this.startDirection),
+				x:this.startPoint.x+this.snake.game.snake.turningRadius*Math.sin(this.startDirection),
+				y:this.startPoint.y-this.snake.game.snake.turningRadius*Math.cos(this.startDirection),
 			}
-			this.endDirection=this.startDirection-this.length/game.snake.turningRadius
-			if (this.endDirection<0) {this.endDirection+=2*Math.PI}
+			this.endDirection=this.startDirection-this.length/this.snake.game.snake.turningRadius
+			if(this.endDirection<0){this.endDirection+=2*Math.PI}
 			this.endPoint={
-				x:this.arcCenter.x-game.snake.turningRadius*Math.sin(this.endDirection),
-				y:this.arcCenter.y+game.snake.turningRadius*Math.cos(this.endDirection),
+				x:this.arcCenter.x-this.snake.game.snake.turningRadius*Math.sin(this.endDirection),
+				y:this.arcCenter.y+this.snake.game.snake.turningRadius*Math.cos(this.endDirection),
 			}
-			break;
+			break
 		default://partType==0
 			this.endDirection=this.startDirection
 			this.endPoint={
@@ -57,128 +58,127 @@ function Part(length,startPoint,startDirection,partType) {
 				y:this.startPoint.y+this.length*Math.sin(this.startDirection),
 			}
 			this.arcCenter=null
-			break;
+			break
 	}
 	
 }
 
-Part.prototype.extend=function(extendLength) {
+Part.prototype.extend=function(extendLength){
 	
 	this.length+=extendLength
 	
-	switch (this.partType) {
+	switch(this.partType){
 		case 1:
-			this.endDirection=this.startDirection+this.length/game.snake.turningRadius
-			if (this.endDirection>2*Math.PI) {this.endDirection-=2*Math.PI}
+			this.endDirection=this.startDirection+this.length/this.snake.game.snake.turningRadius
+			if(this.endDirection>2*Math.PI){this.endDirection-=2*Math.PI}
 			this.endPoint={
-				x:this.arcCenter.x+game.snake.turningRadius*Math.sin(this.endDirection),
-				y:this.arcCenter.y-game.snake.turningRadius*Math.cos(this.endDirection),
+				x:this.arcCenter.x+this.snake.game.snake.turningRadius*Math.sin(this.endDirection),
+				y:this.arcCenter.y-this.snake.game.snake.turningRadius*Math.cos(this.endDirection),
 			}
-			break;
+			break
 		case -1:
-			this.endDirection=this.startDirection-this.length/game.snake.turningRadius
-			if (this.endDirection<0) {this.endDirection+=2*Math.PI}
+			this.endDirection=this.startDirection-this.length/this.snake.game.snake.turningRadius
+			if(this.endDirection<0){this.endDirection+=2*Math.PI}
 			this.endPoint={
-				x:this.arcCenter.x-game.snake.turningRadius*Math.sin(this.endDirection),
-				y:this.arcCenter.y+game.snake.turningRadius*Math.cos(this.endDirection),
+				x:this.arcCenter.x-this.snake.game.snake.turningRadius*Math.sin(this.endDirection),
+				y:this.arcCenter.y+this.snake.game.snake.turningRadius*Math.cos(this.endDirection),
 			}
-			break;
+			break
 		default://partType==0
 			this.endPoint={
 				x:this.startPoint.x+this.length*Math.cos(this.startDirection),
 				y:this.startPoint.y+this.length*Math.sin(this.startDirection),
 			}
-			break;
+			break
 	}
 	
 }
 
-Part.prototype.shorten=function(shortenLength) {
+Part.prototype.shorten=function(shortenLength){
 	
 	this.length-=shortenLength
 	
-	switch (this.partType) {
+	switch(this.partType){
 		case 1:
-			this.startDirection=this.endDirection-this.length/game.snake.turningRadius
-			if (this.startDirection<0) {this.startDirection+=2*Math.PI}
+			this.startDirection=this.endDirection-this.length/this.snake.game.snake.turningRadius
+			if(this.startDirection<0){this.startDirection+=2*Math.PI}
 			this.startPoint={
-				x:this.arcCenter.x+game.snake.turningRadius*Math.sin(this.startDirection),
-				y:this.arcCenter.y-game.snake.turningRadius*Math.cos(this.startDirection),
+				x:this.arcCenter.x+this.snake.game.snake.turningRadius*Math.sin(this.startDirection),
+				y:this.arcCenter.y-this.snake.game.snake.turningRadius*Math.cos(this.startDirection),
 			}
-			break;
+			break
 		case -1:
-			this.startDirection=this.endDirection+this.length/game.snake.turningRadius
-			if (this.startDirection>2*Math.PI) {this.startDirection-=2*Math.PI}
+			this.startDirection=this.endDirection+this.length/this.snake.game.snake.turningRadius
+			if(this.startDirection>2*Math.PI){this.startDirection-=2*Math.PI}
 			this.startPoint={
-				x:this.arcCenter.x-game.snake.turningRadius*Math.sin(this.startDirection),
-				y:this.arcCenter.y+game.snake.turningRadius*Math.cos(this.startDirection),
+				x:this.arcCenter.x-this.snake.game.snake.turningRadius*Math.sin(this.startDirection),
+				y:this.arcCenter.y+this.snake.game.snake.turningRadius*Math.cos(this.startDirection),
 			}
-			break;
+			break
 		default://partType==0
 			this.startPoint={
 				x:this.endPoint.x-this.length*Math.cos(this.startDirection),
 				y:this.endPoint.y-this.length*Math.sin(this.startDirection),
 			}
-			break;
+			break
 	}
-	if (this.startPoint.x<0) {
-		this.startPoint.x+=game.groundSize
-		this.endPoint.x+=game.groundSize
-	} else if (this.startPoint.x>=game.groundSize) {
-		this.startPoint.x-=game.groundSize
-		this.endPoint.x-=game.groundSize
-	} 
-	if (this.startPoint.y<0) {
-		this.startPoint.y+=game.groundSize
-		this.endPoint.y+=game.groundSize
-	} else if (this.startPoint.y>=game.groundSize) {
-		this.startPoint.y-=game.groundSize
-		this.endPoint.y-=game.groundSize
+	if(this.startPoint.x<0){
+		this.startPoint.x+=this.snake.game.groundSize
+		this.endPoint.x+=this.snake.game.groundSize
+	}else if(this.startPoint.x>=this.snake.game.groundSize){
+		this.startPoint.x-=this.snake.game.groundSize
+		this.endPoint.x-=this.snake.game.groundSize
+	}
+	if(this.startPoint.y<0){
+		this.startPoint.y+=this.snake.game.groundSize
+		this.endPoint.y+=this.snake.game.groundSize
+	}else if(this.startPoint.y>=this.snake.game.groundSize){
+		this.startPoint.y-=this.snake.game.groundSize
+		this.endPoint.y-=this.snake.game.groundSize
 	}
 	
 }
 
-Part.prototype.draw=function() {
+Part.prototype.draw=function(){
 	
-	game.canvas.beginPath()
-	for (var i=-1;i<2;i++) {
-		for (var j=-1;j<2;j++) {
-			switch (this.partType) {
+	this.snake.game.canvas.beginPath()
+	for(var i=-1;i<2;i++){
+		for(var j=-1;j<2;j++){
+			switch(this.partType){
 			case 1:
-				game.canvas.arc(this.arcCenter.x+i*game.groundSize,this.arcCenter.y+j*game.groundSize,game.snake.turningRadius+game.snake.width/2,this.startDirection-Math.PI/2,this.endDirection-Math.PI/2,false)
-				game.canvas.arc(this.arcCenter.x+i*game.groundSize,this.arcCenter.y+j*game.groundSize,game.snake.turningRadius-game.snake.width/2,this.endDirection-Math.PI/2,this.startDirection-Math.PI/2,true)
-				break;
+				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius+this.snake.game.snake.width/2,this.startDirection-Math.PI/2,this.endDirection-Math.PI/2,false)
+				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius-this.snake.game.snake.width/2,this.endDirection-Math.PI/2,this.startDirection-Math.PI/2,true)
+				break
 			case -1:
-				game.canvas.arc(this.arcCenter.x+i*game.groundSize,this.arcCenter.y+j*game.groundSize,game.snake.turningRadius+game.snake.width/2,this.startDirection+Math.PI/2,this.endDirection+Math.PI/2,true)
-				game.canvas.arc(this.arcCenter.x+i*game.groundSize,this.arcCenter.y+j*game.groundSize,game.snake.turningRadius-game.snake.width/2,this.endDirection+Math.PI/2,this.startDirection+Math.PI/2,false)
-				break;
+				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius+this.snake.game.snake.width/2,this.startDirection+Math.PI/2,this.endDirection+Math.PI/2,true)
+				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius-this.snake.game.snake.width/2,this.endDirection+Math.PI/2,this.startDirection+Math.PI/2,false)
+				break
 			default://partType==0
-				game.canvas.moveTo(this.startPoint.x-Math.sin(this.startDirection)*(game.snake.width/2)+i*game.groundSize,this.startPoint.y+Math.cos(this.startDirection)*(game.snake.width/2)+j*game.groundSize)
-				game.canvas.lineTo(this.startPoint.x+Math.sin(this.startDirection)*(game.snake.width/2)+i*game.groundSize,this.startPoint.y-Math.cos(this.startDirection)*(game.snake.width/2)+j*game.groundSize)
-				game.canvas.lineTo(this.endPoint.x+Math.sin(this.startDirection)*(game.snake.width/2)+i*game.groundSize,this.endPoint.y-Math.cos(this.startDirection)*(game.snake.width/2)+j*game.groundSize)
-				game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(game.snake.width/2)+i*game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(game.snake.width/2)+j*game.groundSize)
-				break;
+				this.snake.game.canvas.moveTo(this.startPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.startPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
+				this.snake.game.canvas.lineTo(this.startPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.startPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
+				this.snake.game.canvas.lineTo(this.endPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.endPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
+				this.snake.game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
+				break
 			}
-			if(!game.dead){
-				game.dead=game.canvas.isPointInPath(game.snake.headPoint.x,game.snake.headPoint.y)	
+			if(!this.snake.game.dead){
+				this.snake.game.dead=this.snake.game.canvas.isPointInPath(this.snake.game.snake.headPoint.x,this.snake.game.snake.headPoint.y)	
 			}
-			game.canvas.fillStyle=game.color
-			game.canvas.fill()
-			game.canvas.closePath()
-			game.canvas.beginPath()
-			game.canvas.lineWidth=1
-			game.canvas.strokeStyle=game.color
-			game.canvas.moveTo(this.endPoint.x+Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.endPoint.y-Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
-			game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
-			game.canvas.stroke()
-			game.canvas.closePath()
-			game.canvas.beginPath()
-			game.canvas.moveTo(this.startPoint.x-Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.startPoint.y+Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
-			game.canvas.lineTo(this.startPoint.x+Math.sin(this.startDirection)*(game.snake.width/2-1)+i*game.groundSize,this.startPoint.y-Math.cos(this.startDirection)*(game.snake.width/2-1)+j*game.groundSize)
-			game.canvas.stroke()
-			game.canvas.closePath()
-			game.canvas.beginPath()
-			
+			this.snake.game.canvas.fillStyle=this.snake.game.color
+			this.snake.game.canvas.fill()
+			this.snake.game.canvas.closePath()
+			this.snake.game.canvas.beginPath()
+			this.snake.game.canvas.lineWidth=1
+			this.snake.game.canvas.strokeStyle=this.snake.game.color
+			this.snake.game.canvas.moveTo(this.endPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.endPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
+			this.snake.game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
+			this.snake.game.canvas.stroke()
+			this.snake.game.canvas.closePath()
+			this.snake.game.canvas.beginPath()
+			this.snake.game.canvas.moveTo(this.startPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.startPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
+			this.snake.game.canvas.lineTo(this.startPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.startPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
+			this.snake.game.canvas.stroke()
+			this.snake.game.canvas.closePath()
+			this.snake.game.canvas.beginPath()
 		}
 	}
 	
