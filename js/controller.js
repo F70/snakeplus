@@ -77,17 +77,20 @@ Game.prototype.setController=function(){
 		document.getElementById("touchPause").addEventListener("touchend",touchPause,false)
 		document.getElementById("touchPause").addEventListener("touchcancel",touchPause,false)
 		var leftTouchDown=function(event){
+			this.noInputDuring=0
 			this.rawInput.touchLeft.push(event.identifier)
 			updateInput()
 			if(!document.getElementById("touchLeft").classList.contains("touching")){document.getElementById("touchLeft").classList.add("touching")}
 		}.bind(this)
 		var rightTouchDown=function(event){
+			this.noInputDuring=0
 			this.rawInput.touchRight.push(event.identifier)
 			updateInput()
 			console.log(this.rawInput)
 			if(!document.getElementById("touchRight").classList.contains("touching")){document.getElementById("touchRight").classList.add("touching")}
 		}.bind(this)
 		var directionTouchUp=function(event){
+			this.noInputDuring=0
 			for (var i=0;i<this.rawInput.touchLeft.length;i++){
 				if(this.rawInput.touchLeft[i]==event.identifier){
 					this.rawInput.touchLeft.splice(i,1)
