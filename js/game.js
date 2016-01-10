@@ -9,6 +9,8 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 	this.rawInput={
 		keyLeft:0,
 		keyRight:0,
+		keyA:0,
+		keyD:0
 	}
 	this.input={
 		left:0,
@@ -44,6 +46,12 @@ Game.prototype.loop=function(){
 	if(this.dead==true){
 		this.input.left=0
 		this.input.right=0
+		this.rawInput={
+			keyLeft:0,
+			keyRight:0,
+			keyA:0,
+			keyD:0
+		}
 		this.ui.goToScore()
 		return
 	}
