@@ -85,6 +85,7 @@ Game.prototype.loop=function(){
 	if(this.noInputDuring>this.groundSize*this.groundSize/this.snakeSpeed/this.snakeWidth){
 		document.getElementById("pauseOverlay").style.visibility="visible"
 		document.getElementById("pauseOverlay").style.opacity="1"
+		document.getElementById("touchController").style.opacity="0"
 		return
 	}
 	this.loopId=requestAnimationFrame(this.loop.bind(this))

@@ -93,5 +93,6 @@ html,body{margin:0;height:100%}
 #touchLeft>.touchBottom{left:0;bottom:0;background-image:url(../img/resetleft.svg);background-size:100%}
 #touchRight>.touchBottom{right:0;bottom:0;background-image:url(../img/reset.svg);background-size:100%}
 #touchPause>.touchBottom{right:0;top:0;background-image:url(../img/pause.svg);background-size:100%}
-.touching>.touchBottom::before{content:"";position:absolute;height:100%;width:100%;background-color:#f70;transition:all 250ms;opacity:0}
-.touchArea.touching>.touchBottom::before{opacity:1}
+.touchArea>.touchBottom::before{content:"";position:absolute;height:100%;width:100%;background-color:#f70;transition:all 250ms;opacity:0}
+#touchPause:hover>.touchBottom::before{opacity:0.5}
+.touchArea.touching>.touchBottom::before,#touchPause:active>.touchBottom::before{opacity:1}

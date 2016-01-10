@@ -86,54 +86,56 @@ Game.prototype.setUI=function(){
 		removeEventListener("mouseup",changeSpeedMouseUp)
 	}.bind(this)
 	
-	var changeSpeedTouchDown=function(event){
-		var touch=event.changedTouches[0]
-		this.ui.speedSliderLeft=document.getElementById("speedSliderArea").offsetLeft
-			+document.getElementById("speedSlider").offsetLeft
-			+document.getElementById("speedController").offsetLeft
-			+document.getElementById("settingList").offsetLeft
-			+document.getElementById("setting").offsetLeft
-			+document.getElementById("uiBox").offsetLeft
-			+document.getElementById("box").offsetLeft
-		document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
-		this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38
-		this.ui.speedSliderTouchStartPoint=touch.clientX
-		this.ui.speedSliderTouchId=touch.identifier
-		addEventListener("touchmove",changeSpeedTouchMove,false)
-		addEventListener("touchend",changeSpeedTouchUp,false)
-		addEventListener("touchcancel",changeSpeedTouchUp,false)
-	}.bind(this)
-	
-	var changeSpeedTouchMove=function(event){
-		var touch
-		for(var i=0;i<event.changedTouches.length;i++){
-			if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
-				touch=event.changedTouches[i]
-				break
-			}
-		}
-		if(this.ui.speedSliderTouchStartPoint!=touch.clientX){
-			document.getElementById("speedSliderButton").style.transition="none"
+	if(systemVar.isTouch){
+		var changeSpeedTouchDown=function(event){
+			var touch=event.changedTouches[0]
+			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").offsetLeft
+				+document.getElementById("speedSlider").offsetLeft
+				+document.getElementById("speedController").offsetLeft
+				+document.getElementById("settingList").offsetLeft
+				+document.getElementById("setting").offsetLeft
+				+document.getElementById("uiBox").offsetLeft
+				+document.getElementById("box").offsetLeft
 			document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
 			this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38
-		}
-	}.bind(this)
-	
-	var changeSpeedTouchUp=function(event){
-		var touch
-		for(var i=0;i<event.changedTouches.length;i++){
-			if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
-				touch=event.changedTouches[i]
-				break
+			this.ui.speedSliderTouchStartPoint=touch.clientX
+			this.ui.speedSliderTouchId=touch.identifier
+			addEventListener("touchmove",changeSpeedTouchMove,false)
+			addEventListener("touchend",changeSpeedTouchUp,false)
+			addEventListener("touchcancel",changeSpeedTouchUp,false)
+		}.bind(this)
+		
+		var changeSpeedTouchMove=function(event){
+			var touch
+			for(var i=0;i<event.changedTouches.length;i++){
+				if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
+					touch=event.changedTouches[i]
+					break
+				}
 			}
-		}
-		document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
-		document.getElementById("speedSliderButton").style.transition=""
-		this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38		
-		removeEventListener("touchmove",changeSpeedTouchMove)
-		removeEventListener("touchend",changeSpeedTouchUp)
-		removeEventListener("touchcancel",changeSpeedTouchUp)
-	}.bind(this)
+			if(this.ui.speedSliderTouchStartPoint!=touch.clientX){
+				document.getElementById("speedSliderButton").style.transition="none"
+				document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
+				this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38
+			}
+		}.bind(this)
+		
+		var changeSpeedTouchUp=function(event){
+			var touch
+			for(var i=0;i<event.changedTouches.length;i++){
+				if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
+					touch=event.changedTouches[i]
+					break
+				}
+			}
+			document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
+			document.getElementById("speedSliderButton").style.transition=""
+			this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38		
+			removeEventListener("touchmove",changeSpeedTouchMove)
+			removeEventListener("touchend",changeSpeedTouchUp)
+			removeEventListener("touchcancel",changeSpeedTouchUp)
+		}.bind(this)
+	}
 	
 	document.getElementById("playButton").addEventListener("click",turnToGame,false)
 	document.getElementById("settingButton").addEventListener("click",jumpToBoardFunctionGenerator("setting"),false)

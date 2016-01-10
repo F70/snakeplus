@@ -1,8 +1,8 @@
 Game.prototype.setController=function(){
 	
 	var updateInput=function(){
-		this.input.left=this.rawInput.keyLeft+this.rawInput.keyA
-		this.input.right=this.rawInput.keyRight+this.rawInput.keyD
+		this.input.left=this.rawInput.keyLeft+this.rawInput.keyA+this.rawInput.touchLeft.length
+		this.input.right=this.rawInput.keyRight+this.rawInput.keyD+this.rawInput.touchRight.length
 	}.bind(this)
 	
 	function keydown(event){
@@ -67,4 +67,12 @@ Game.prototype.setController=function(){
 	document.addEventListener("keydown",keydown.bind(this),false)
 	document.addEventListener("keyup",keyup.bind(this),false)
 	
+	if(systemVar.isTouch){
+		var touchPause=function(){
+			this.pause()
+			this.noInputDuring=0
+		}.bind(this)
+		document.getElementById("touchPause").addEventListener("touchend",touchPause,false)
+		document.getElementById("touchPause").addEventListener("touchcancel",touchPause,false)
+	}
 }
