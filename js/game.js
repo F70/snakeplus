@@ -10,7 +10,9 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 		keyLeft:0,
 		keyRight:0,
 		keyA:0,
-		keyD:0
+		keyD:0,
+		touchLeft:[],
+		touchRight:[]
 	}
 	this.input={
 		left:0,
@@ -43,6 +45,7 @@ Game.prototype.setSnake=function(){
 
 Game.prototype.loop=function(){
 	
+	if(systemVar.isTouch&&document.getElementById("touchController").style.opacity=="0"){document.getElementById("touchController").style.opacity="1"}
 	if(this.dead==true){
 		this.input.left=0
 		this.input.right=0
@@ -50,7 +53,9 @@ Game.prototype.loop=function(){
 			keyLeft:0,
 			keyRight:0,
 			keyA:0,
-			keyD:0
+			keyD:0,
+			touchLeft:[],
+			touchRight:[]
 		}
 		this.ui.goToScore()
 		return
@@ -90,6 +95,7 @@ Game.prototype.pause=function(){
 	cancelAnimationFrame(this.loopId)
 	document.getElementById("pauseOverlay").style.visibility="visible"
 	document.getElementById("pauseOverlay").style.opacity="1"
+	if(systemVar.isTouch){document.getElementById("touchController").style.opacity="0"}
 }
 
 Game.prototype.reset=function(){
@@ -97,6 +103,7 @@ Game.prototype.reset=function(){
 	this.dead=false
 	this.setSnake()
 	this.foodPoint=undefined
+	if(systemVar.isTouch){document.getElementById("touchController").style.opacity="1"}
 	this.loop()
 	this.noInputDuring=0
 	this.ui.drawScore(this.score)

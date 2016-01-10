@@ -149,6 +149,7 @@ Game.prototype.setUI=function(){
 	this.ui.goToScore=function(){
 		this.ui.toRunFunction=function(){
 			document.getElementById("score").style.opacity="1"
+			if(systemVar.isTouch){document.getElementById("touchController").style.opacity="0"}
 			document.getElementById("score").style.marginTop=(this.groundSize/2-72)+"px"
 			document.getElementById("gameBox").style.display="none"
 			document.getElementById("died").style.display="inline"

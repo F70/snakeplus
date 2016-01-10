@@ -84,10 +84,12 @@ html,body{margin:0;height:100%}
 .number0{background-position:-544px 0px}
 
 /*touch*/
-#touchController{display:none}
-.touchArea{position:fixed;height:256px;width:256px;bottom:0}
-#touchLeft{left:0}
-#touchRight{right:0}
-.touchArea>.touchBottom{position:absolute;bottom:0;margin:32px;width:64px;height:64px;border-style:solid;border-color:#f70;border-width:1px}
-#touchLeft>.touchBottom{left:0;background-image:url(../img/resetleft.svg);background-size:100%}
-#touchRight>.touchBottom{right:0;background-image:url(../img/reset.svg);background-size:100%}
+#touchController{display:none;opacity:0;transition:all 250ms}
+.touchArea{position:fixed;height:256px;width:256px}
+#touchLeft{left:0;bottom:0}
+#touchRight{right:0;bottom:0}
+#touchPause{top:0;right:0}
+.touchArea>.touchBottom{position:absolute;margin:32px;width:64px;height:64px;border-style:solid;border-color:#f70;border-width:1px}
+#touchLeft>.touchBottom{left:0;bottom:0;background-image:url(../img/resetleft.svg);background-size:100%}
+#touchRight>.touchBottom{right:0;bottom:0;background-image:url(../img/reset.svg);background-size:100%}
+#touchPause>.touchBottom{right:0;top:0;background-image:url(../img/pause.svg);background-size:100%}
