@@ -25,7 +25,7 @@ addEventListener("resize",resetViewport,false)
 resetViewport()
 
 systemVar.isTouch=("ontouchmove" in document)
-
+if(systemVar.isTouch){document.getElementsByTagName("html")[0].classList.add("touch")}
 
 function loadGame(){
 	game=new Game("snakeArea",1,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
