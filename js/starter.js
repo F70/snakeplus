@@ -1,6 +1,6 @@
 var game
 var systemVar={}
-var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg","img/reset.svg","img/setting.svg","img/title.svg","img/snakespeed.svg","img/wallicon.svg","img/walllist.svg","img/wall.svg"]
+var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg","img/reset.svg","img/resetleft.svg","img/setting.svg","img/title.svg","img/snakespeed.svg","img/wallicon.svg","img/walllist.svg","img/wall.svg"]
 var imageList=[]
 var loadedImageNumber=0
 
@@ -26,9 +26,11 @@ resetViewport()
 
 systemVar.isTouch=("ontouchmove" in document)
 
+
 function loadGame(){
 	game=new Game("snakeArea",1,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
 	game.setSnake()
+	if(systemVar.isTouch){document.getElementById("touchController").style.display="block"}
 	game.setController()
 	game.setUI()
 	document.getElementById("box").style.opacity="1"
