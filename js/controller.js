@@ -1,49 +1,54 @@
 Game.prototype.setController=function(){
 	
+	var updateInput=function(){
+		this.input.left=this.rawInput.keyLeft
+		this.input.right=this.rawInput.keyRight
+	}.bind(this)
+	
 	function keydown(event){
-		if(game.dead==true){return}
+		if(this.dead==true){return}
 		switch(event.keyCode){
 			case 39://right
-				game.input.keyRight=1
+				this.rawInput.keyRight=1
 				this.noInputDuring=0
 				break
 			case 37://left
-				game.input.keyLeft=1
+				this.rawInput.keyLeft=1
 				this.noInputDuring=0
 				break
 			case 80://pause
 			case 27://pause
 				if(document.getElementById("gameBox").style.display=="inline"){
-				game.pause()
-				game.noInputDuring=0	
+				this.pause()
+				this.noInputDuring=0	
 				}
 				break
 			default:
 				break
 		}
-		console.log(game.input)
-		
+		console.log(this.rawInput)
+		updateInput()
 	}
 	
 	function keyup(event){
-		if(game.dead==true){return}
+		if(this.dead==true){return}
 		switch(event.keyCode){
 			case 39://right
-				game.input.keyRight=0
-				game.noInputDuring=0
+				this.rawInput.keyRight=0
+				this.noInputDuring=0
 				break
 			case 37://left
-				game.input.keyLeft=0
-				game.noInputDuring=0
+				this.rawInput.keyLeft=0
+				this.noInputDuring=0
 				break
 			default:
 				break
 		}
-		console.log(game.input)
-		
+		console.log(this.rawInput)
+		updateInput()
 	}
 	
-	document.addEventListener("keydown",keydown,false)
-	document.addEventListener("keyup",keyup,false)
+	document.addEventListener("keydown",keydown.bind(this),false)
+	document.addEventListener("keyup",keyup.bind(this),false)
 	
 }
