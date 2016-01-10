@@ -46,6 +46,8 @@ Game.prototype.setSnake=function(){
 Game.prototype.loop=function(){
 	
 	if(systemVar.isTouch&&document.getElementById("touchController").style.opacity=="0"){document.getElementById("touchController").style.opacity="1"}
+	if(document.getElementById("touchLeft").classList.contains("touching")&&this.rawInput.touchLeft.length==0){document.getElementById("touchLeft").classList.remove("touching")}
+	if(document.getElementById("touchRight").classList.contains("touching")&&this.rawInput.touchRight.length==0){document.getElementById("touchRight").classList.remove("touching")}
 	if(this.dead==true){
 		this.input.left=0
 		this.input.right=0

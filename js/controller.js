@@ -69,10 +69,47 @@ Game.prototype.setController=function(){
 	
 	if(systemVar.isTouch){
 		var touchPause=function(){
-			this.pause()
-			this.noInputDuring=0
+			if(document.getElementById("gameBox").style.display=="inline"){
+				this.pause()
+				this.noInputDuring=0	
+			}
 		}.bind(this)
 		document.getElementById("touchPause").addEventListener("touchend",touchPause,false)
 		document.getElementById("touchPause").addEventListener("touchcancel",touchPause,false)
+		var leftTouchDown=function(event){
+			this.rawInput.touchLeft.push(event.identifier)
+			updateInput()
+			if(!document.getElementById("touchLeft").classList.contains("touching")){document.getElementById("touchLeft").classList.add("touching")}
+		}.bind(this)
+		var rightTouchDown=function(event){
+			this.rawInput.touchRight.push(event.identifier)
+			updateInput()
+			console.log(this.rawInput)
+			if(!document.getElementById("touchRight").classList.contains("touching")){document.getElementById("touchRight").classList.add("touching")}
+		}.bind(this)
+		var directionTouchUp=function(event){
+			for (var i=0;i<this.rawInput.touchLeft.length;i++){
+				if(this.rawInput.touchLeft[i]==event.identifier){
+					this.rawInput.touchLeft.splice(i,1)
+					updateInput()
+					console.log(this.rawInput)
+					if(this.rawInput.touchLeft.length==0){document.getElementById("touchLeft").classList.remove("touching")}
+					return
+				}
+			}
+			for (var i=0;i<this.rawInput.touchRight.length;i++){
+				if(this.rawInput.touchRight[i]==event.identifier){
+					this.rawInput.touchRight.splice(i,1)
+					updateInput()
+					console.log(this.rawInput)
+					if(this.rawInput.touchRight.length==0){document.getElementById("touchRight").classList.remove("touching")}
+					return
+				}
+			}
+		}.bind(this)
+		document.getElementById("touchLeft").addEventListener("touchstart",leftTouchDown,false)
+		document.getElementById("touchRight").addEventListener("touchstart",rightTouchDown,false)
+		document.addEventListener("touchend",directionTouchUp,false)
+		document.addEventListener("touchcancel",directionTouchUp,false)
 	}
 }
