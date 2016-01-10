@@ -1,4 +1,4 @@
-//parts of this.snake.game.snake
+//parts of snake
 function Part(length,startPoint,startDirection,partType,currentSnake){
 	
 	this.snake=currentSnake
