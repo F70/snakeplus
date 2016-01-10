@@ -101,6 +101,7 @@ Game.prototype.setUI=function(){
 		this.ui.speedSliderTouchId=touch.identifier
 		addEventListener("touchmove",changeSpeedTouchMove,false)
 		addEventListener("touchend",changeSpeedTouchUp,false)
+		addEventListener("touchcancel",changeSpeedTouchUp,false)
 	}.bind(this)
 	
 	var changeSpeedTouchMove=function(event){
@@ -128,9 +129,10 @@ Game.prototype.setUI=function(){
 		}
 		document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
 		document.getElementById("speedSliderButton").style.transition=""
-		this.snakeSpeed=1+positionGenerator(event.clientX-this.ui.speedSliderLeft)/38		
+		this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38		
 		removeEventListener("touchmove",changeSpeedTouchMove)
 		removeEventListener("touchend",changeSpeedTouchUp)
+		removeEventListener("touchcancel",changeSpeedTouchUp)
 	}.bind(this)
 	
 	document.getElementById("playButton").addEventListener("click",turnToGame,false)
@@ -143,8 +145,8 @@ Game.prototype.setUI=function(){
 	document.getElementById("tryAgainButton").addEventListener("click",turnToGame,false)
 	document.getElementById("backToMenuFromSettingButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
 	document.getElementById("backToMenuFromCreditButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
-	if(!systemVar.isTouch){document.getElementById("speedSliderArea").addEventListener("mousedown",changeSpeedMouseDown,false)}
-	else{document.getElementById("speedSliderArea").addEventListener("touchstart",changeSpeedTouchDown,false)}
+	document.getElementById("speedSliderArea").addEventListener("mousedown",changeSpeedMouseDown,false)
+	if(systemVar.isTouch){document.getElementById("speedSliderArea").addEventListener("touchstart",changeSpeedTouchDown,false)}
 	
 	for(var i=0;i<5;i++){
 		document.getElementById("wallSelector"+i).addEventListener("click",chooseWallFunctionGenerator(i),false)
