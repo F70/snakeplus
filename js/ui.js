@@ -88,6 +88,7 @@ Game.prototype.setUI=function(){
 	
 	if(systemVar.isTouch){
 		var changeSpeedTouchDown=function(event){
+			event.preventDefault()
 			var touch=event.changedTouches[0]
 			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").offsetLeft
 				+document.getElementById("speedSlider").offsetLeft
@@ -106,6 +107,7 @@ Game.prototype.setUI=function(){
 		}.bind(this)
 		
 		var changeSpeedTouchMove=function(event){
+			event.preventDefault()
 			var touch
 			for(var i=0;i<event.changedTouches.length;i++){
 				if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
@@ -121,6 +123,7 @@ Game.prototype.setUI=function(){
 		}.bind(this)
 		
 		var changeSpeedTouchUp=function(event){
+			event.preventDefault()
 			var touch
 			for(var i=0;i<event.changedTouches.length;i++){
 				if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
