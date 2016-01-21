@@ -59,6 +59,15 @@ Game.prototype.setUI=function(){
 
 	var positionGenerator=function(x){return Math.max(12,Math.min(164,x))-12}
 	
+	if(systemVar.isTouch){
+		var touchVersionGenerator=function(listener){
+			return function(event){
+				event.preventDefault()
+				listener()
+			}
+		}
+	}
+	
 	var changeSpeedMouseDown=function(event){
 		if(event.button==0){
 			document.getElementById("speedSliderButton").style.left=positionGenerator(event.offsetX)+"px"
@@ -88,6 +97,7 @@ Game.prototype.setUI=function(){
 	
 	if(systemVar.isTouch){
 		var changeSpeedTouchDown=function(event){
+			event.preventDefault()
 			var touch=event.changedTouches[0]
 			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").offsetLeft
 				+document.getElementById("speedSlider").offsetLeft
@@ -106,6 +116,7 @@ Game.prototype.setUI=function(){
 		}.bind(this)
 		
 		var changeSpeedTouchMove=function(event){
+			event.preventDefault()
 			var touch
 			for(var i=0;i<event.changedTouches.length;i++){
 				if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
@@ -121,6 +132,7 @@ Game.prototype.setUI=function(){
 		}.bind(this)
 		
 		var changeSpeedTouchUp=function(event){
+			event.preventDefault()
 			var touch
 			for(var i=0;i<event.changedTouches.length;i++){
 				if(event.changedTouches[i].identifier==this.ui.speedSliderTouchId){
@@ -148,7 +160,19 @@ Game.prototype.setUI=function(){
 	document.getElementById("backToMenuFromSettingButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
 	document.getElementById("backToMenuFromCreditButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
 	document.getElementById("speedSliderArea").addEventListener("mousedown",changeSpeedMouseDown,false)
-	if(systemVar.isTouch){document.getElementById("speedSliderArea").addEventListener("touchstart",changeSpeedTouchDown,false)}
+	if(systemVar.isTouch){
+		document.getElementById("playButton").addEventListener("touchend",turnToGame,false)
+		document.getElementById("settingButton").addEventListener("touchend",jumpToBoardFunctionGenerator("setting"),false)
+		document.getElementById("creditButton").addEventListener("touchend",jumpToBoardFunctionGenerator("credit"),false)
+		document.getElementById("backToMenuFromGameButton").addEventListener("touchend",backToMenuFromGame,false)
+		document.getElementById("replayButton").addEventListener("touchend",turnToGame,false)
+		document.getElementById("continueButton").addEventListener("touchend",continueGame,false)
+		document.getElementById("backToMenuFromDiedButton").addEventListener("touchend",jumpToBoardFunctionGenerator("menu"),false)
+		document.getElementById("tryAgainButton").addEventListener("touchend",turnToGame,false)
+		document.getElementById("backToMenuFromSettingButton").addEventListener("touchend",jumpToBoardFunctionGenerator("menu"),false)
+		document.getElementById("backToMenuFromCreditButton").addEventListener("touchend",jumpToBoardFunctionGenerator("menu"),false)
+		document.getElementById("speedSliderArea").addEventListener("touchstart",changeSpeedTouchDown,false)
+	}
 	
 	for(var i=0;i<5;i++){
 		document.getElementById("wallSelector"+i).addEventListener("click",chooseWallFunctionGenerator(i),false)
