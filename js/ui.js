@@ -177,6 +177,11 @@ Game.prototype.setUI=function(){
 	for(var i=0;i<5;i++){
 		document.getElementById("wallSelector"+i).addEventListener("click",chooseWallFunctionGenerator(i),false)
 	}
+	if(systemVar.isTouch){
+		for(var i=0;i<5;i++){
+			document.getElementById("wallSelector"+i).addEventListener("touchend",touchVersionGenerator(chooseWallFunctionGenerator(i)),false)
+		}
+	}
 	
 	document.getElementById("box").addEventListener("transitionend",function(event){
 		if(!this.ui.started){
