@@ -99,13 +99,7 @@ Game.prototype.setUI=function(){
 		var changeSpeedTouchDown=function(event){
 			event.preventDefault()
 			var touch=event.changedTouches[0]
-			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").offsetLeft
-				+document.getElementById("speedSlider").offsetLeft
-				+document.getElementById("speedController").offsetLeft
-				+document.getElementById("settingList").offsetLeft
-				+document.getElementById("setting").offsetLeft
-				+document.getElementById("uiBox").offsetLeft
-				+document.getElementById("box").offsetLeft
+			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").getBoundingClientRect().left
 			document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
 			this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38
 			this.ui.speedSliderTouchStartPoint=touch.clientX
@@ -161,16 +155,16 @@ Game.prototype.setUI=function(){
 	document.getElementById("backToMenuFromCreditButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
 	document.getElementById("speedSliderArea").addEventListener("mousedown",changeSpeedMouseDown,false)
 	if(systemVar.isTouch){
-		document.getElementById("playButton").addEventListener("touchend",turnToGame,false)
-		document.getElementById("settingButton").addEventListener("touchend",jumpToBoardFunctionGenerator("setting"),false)
-		document.getElementById("creditButton").addEventListener("touchend",jumpToBoardFunctionGenerator("credit"),false)
-		document.getElementById("backToMenuFromGameButton").addEventListener("touchend",backToMenuFromGame,false)
-		document.getElementById("replayButton").addEventListener("touchend",turnToGame,false)
-		document.getElementById("continueButton").addEventListener("touchend",continueGame,false)
-		document.getElementById("backToMenuFromDiedButton").addEventListener("touchend",jumpToBoardFunctionGenerator("menu"),false)
-		document.getElementById("tryAgainButton").addEventListener("touchend",turnToGame,false)
-		document.getElementById("backToMenuFromSettingButton").addEventListener("touchend",jumpToBoardFunctionGenerator("menu"),false)
-		document.getElementById("backToMenuFromCreditButton").addEventListener("touchend",jumpToBoardFunctionGenerator("menu"),false)
+		document.getElementById("playButton").addEventListener("touchend",touchVersionGenerator(turnToGame),false)
+		document.getElementById("settingButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("setting")),false)
+		document.getElementById("creditButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("credit")),false)
+		document.getElementById("backToMenuFromGameButton").addEventListener("touchend",touchVersionGenerator(backToMenuFromGame),false)
+		document.getElementById("replayButton").addEventListener("touchend",touchVersionGenerator(turnToGame),false)
+		document.getElementById("continueButton").addEventListener("touchend",touchVersionGenerator(continueGame),false)
+		document.getElementById("backToMenuFromDiedButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("menu")),false)
+		document.getElementById("tryAgainButton").addEventListener("touchend",touchVersionGenerator(turnToGame),false)
+		document.getElementById("backToMenuFromSettingButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("menu")),false)
+		document.getElementById("backToMenuFromCreditButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("menu")),false)
 		document.getElementById("speedSliderArea").addEventListener("touchstart",changeSpeedTouchDown,false)
 	}
 	

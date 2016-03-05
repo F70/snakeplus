@@ -35,7 +35,12 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 	this.changeWall(wallNumber)
 	var textureImage=new Image()
 	textureImage.src=wallTexture
-	this.wallTexture=this.canvas.createPattern(textureImage,"repeat")
+	var textureElement=document.createElement("canvas")
+	textureElement.height=textureImage.height*this.zoomRate
+	textureElement.width=textureImage.width*this.zoomRate
+	var textureCanvas=textureElement.getContext("2d")
+	textureCanvas.drawImage(textureImage,0,0,textureImage.width,textureImage.height,0,0,textureElement.width,textureElement.height)
+	this.wallTexture=this.canvas.createPattern(textureElement,"repeat")
 	
 	this.score=0
 	this.noInputDuring=0
@@ -90,7 +95,7 @@ Game.prototype.loop=function(){
 	if(this.noInputDuring>this.groundSize*this.groundSize/this.snakeSpeed/this.snakeWidth){
 		document.getElementById("pauseOverlay").style.visibility="visible"
 		document.getElementById("pauseOverlay").style.opacity="1"
-		document.getElementById("touchController").style.opacity="0"
+		if(systemVar.isTouch){document.getElementById("touchController").style.opacity="0"}
 		return
 	}
 	this.loopId=requestAnimationFrame(this.loop.bind(this))
