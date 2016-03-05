@@ -74,17 +74,17 @@ Snake.prototype.draw=function(){
 	var headDirection=this.parts[this.parts.length-1].endDirection
 	for(var i=-1;i<2;i++){
 		for(var j=-1;j<2;j++){
-			this.game.canvas.moveTo(this.headPoint.x+i*this.game.groundSize,this.headPoint.y+j*this.game.groundSize)
-			this.game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
-			this.game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
+			this.game.canvas.moveTo((this.headPoint.x+i*this.game.groundSize)*this.game.zoomRate,(this.headPoint.y+j*this.game.groundSize)*this.game.zoomRate)
+			this.game.canvas.lineTo((this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize)*this.game.zoomRate,(this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)*this.game.zoomRate)
+			this.game.canvas.lineTo((this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize)*this.game.zoomRate,(this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)*this.game.zoomRate)
 			this.game.canvas.fillStyle=this.game.color
 			this.game.canvas.fill()
 			this.game.canvas.closePath()
 			this.game.canvas.beginPath()
-			this.game.canvas.lineWidth=1
+			this.game.canvas.lineWidth=this.game.zoomRate
 			this.game.canvas.strokeStyle=this.game.color
-			this.game.canvas.moveTo(this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
-			this.game.canvas.lineTo(this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize,this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)
+			this.game.canvas.moveTo((this.headPoint.x-this.width*Math.cos(headDirection)-(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize)*this.game.zoomRate,(this.headPoint.y-this.width*Math.sin(headDirection)+(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)*this.game.zoomRate)
+			this.game.canvas.lineTo((this.headPoint.x-this.width*Math.cos(headDirection)+(this.width/2)*Math.sin(headDirection)+i*this.game.groundSize)*this.game.zoomRate,(this.headPoint.y-this.width*Math.sin(headDirection)-(this.width/2)*Math.cos(headDirection)+j*this.game.groundSize)*this.game.zoomRate)
 			this.game.canvas.stroke()
 			this.game.canvas.closePath()
 			this.game.canvas.beginPath()

@@ -3,17 +3,17 @@ function Wall(verticesList){
 }
 
 Wall.prototype.draw=function(currentGame){
-	currentGame.canvas.moveTo(this.verticesList[0].x,this.verticesList[0].y)
+	currentGame.canvas.moveTo(this.verticesList[0].x*currentGame.zoomRate,this.verticesList[0].y*currentGame.zoomRate)
 	for(var i=0;i<this.verticesList.length;i++){
-		currentGame.canvas.lineTo(this.verticesList[i].x,this.verticesList[i].y)
+		currentGame.canvas.lineTo(this.verticesList[i].x*currentGame.zoomRate,this.verticesList[i].y*currentGame.zoomRate)
 	}
-	currentGame.canvas.lineTo(this.verticesList[0].x,this.verticesList[0].y)
+	currentGame.canvas.lineTo(this.verticesList[0].x*currentGame.zoomRate,this.verticesList[0].y*currentGame.zoomRate)
 	if(!currentGame.dead){
-		currentGame.dead=currentGame.canvas.isPointInPath(currentGame.snake.headPoint.x,currentGame.snake.headPoint.y)	
+		currentGame.dead=currentGame.canvas.isPointInPath(currentGame.snake.headPoint.x*currentGame.zoomRate,currentGame.snake.headPoint.y*currentGame.zoomRate)	
 	}
 	currentGame.canvas.fillStyle=currentGame.wallTexture	
 	currentGame.canvas.fill()
-	currentGame.canvas.lineWidth=1
+	currentGame.canvas.lineWidth=currentGame.zoomRate
 	currentGame.canvas.strokeStyle=currentGame.color
 	currentGame.canvas.stroke()
 	currentGame.canvas.closePath()
