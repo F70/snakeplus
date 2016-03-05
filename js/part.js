@@ -146,36 +146,36 @@ Part.prototype.draw=function(){
 		for(var j=-1;j<2;j++){
 			switch(this.partType){
 			case 1:
-				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius+this.snake.game.snake.width/2,this.startDirection-Math.PI/2,this.endDirection-Math.PI/2,false)
-				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius-this.snake.game.snake.width/2,this.endDirection-Math.PI/2,this.startDirection-Math.PI/2,true)
+				this.snake.game.canvas.arc((this.arcCenter.x+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.arcCenter.y+j*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.snake.game.snake.turningRadius+this.snake.game.snake.width/2)*this.snake.game.zoomRate,this.startDirection-Math.PI/2,this.endDirection-Math.PI/2,false)
+				this.snake.game.canvas.arc((this.arcCenter.x+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.arcCenter.y+j*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.snake.game.snake.turningRadius-this.snake.game.snake.width/2)*this.snake.game.zoomRate,this.endDirection-Math.PI/2,this.startDirection-Math.PI/2,true)
 				break
 			case -1:
-				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius+this.snake.game.snake.width/2,this.startDirection+Math.PI/2,this.endDirection+Math.PI/2,true)
-				this.snake.game.canvas.arc(this.arcCenter.x+i*this.snake.game.groundSize,this.arcCenter.y+j*this.snake.game.groundSize,this.snake.game.snake.turningRadius-this.snake.game.snake.width/2,this.endDirection+Math.PI/2,this.startDirection+Math.PI/2,false)
+				this.snake.game.canvas.arc((this.arcCenter.x+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.arcCenter.y+j*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.snake.game.snake.turningRadius+this.snake.game.snake.width/2)*this.snake.game.zoomRate,this.startDirection+Math.PI/2,this.endDirection+Math.PI/2,true)
+				this.snake.game.canvas.arc((this.arcCenter.x+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.arcCenter.y+j*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.snake.game.snake.turningRadius-this.snake.game.snake.width/2)*this.snake.game.zoomRate,this.endDirection+Math.PI/2,this.startDirection+Math.PI/2,false)
 				break
 			default://partType==0
-				this.snake.game.canvas.moveTo(this.startPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.startPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
-				this.snake.game.canvas.lineTo(this.startPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.startPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
-				this.snake.game.canvas.lineTo(this.endPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.endPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
-				this.snake.game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)
+				this.snake.game.canvas.moveTo((this.startPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.startPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
+				this.snake.game.canvas.lineTo((this.startPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.startPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
+				this.snake.game.canvas.lineTo((this.endPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.endPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
+				this.snake.game.canvas.lineTo((this.endPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.endPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
 				break
 			}
 			if(!this.snake.game.dead){
-				this.snake.game.dead=this.snake.game.canvas.isPointInPath(this.snake.game.snake.headPoint.x,this.snake.game.snake.headPoint.y)	
+				this.snake.game.dead=this.snake.game.canvas.isPointInPath((this.snake.game.snake.headPoint.x)*this.snake.game.zoomRate,(this.snake.game.snake.headPoint.y)*this.snake.game.zoomRate)	
 			}
 			this.snake.game.canvas.fillStyle=this.snake.game.color
 			this.snake.game.canvas.fill()
 			this.snake.game.canvas.closePath()
 			this.snake.game.canvas.beginPath()
-			this.snake.game.canvas.lineWidth=1
+			this.snake.game.canvas.lineWidth=this.snake.game.zoomRate
 			this.snake.game.canvas.strokeStyle=this.snake.game.color
-			this.snake.game.canvas.moveTo(this.endPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.endPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
-			this.snake.game.canvas.lineTo(this.endPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.endPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
+			this.snake.game.canvas.moveTo((this.endPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.endPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
+			this.snake.game.canvas.lineTo((this.endPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.endPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
 			this.snake.game.canvas.stroke()
 			this.snake.game.canvas.closePath()
 			this.snake.game.canvas.beginPath()
-			this.snake.game.canvas.moveTo(this.startPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.startPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
-			this.snake.game.canvas.lineTo(this.startPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize,this.startPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)
+			this.snake.game.canvas.moveTo((this.startPoint.x-Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.startPoint.y+Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
+			this.snake.game.canvas.lineTo((this.startPoint.x+Math.sin(this.startDirection)*(this.snake.game.snake.width/2-1)+i*this.snake.game.groundSize)*this.snake.game.zoomRate,(this.startPoint.y-Math.cos(this.startDirection)*(this.snake.game.snake.width/2-1)+j*this.snake.game.groundSize)*this.snake.game.zoomRate)
 			this.snake.game.canvas.stroke()
 			this.snake.game.canvas.closePath()
 			this.snake.game.canvas.beginPath()

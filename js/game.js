@@ -1,9 +1,12 @@
 function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,snakeSpeed,snakeTurningRadius,foodSize,growthPerFood,wallNumber,wallTexture){
 	
-	this.canvas=document.getElementById(canvasId).getContext("2d")
+	this.canvasElement=document.getElementById(canvasId)
+	this.canvas=this.canvasElement.getContext("2d")
 	this.canvas.imageSmoothingEnabled=false
 	this.groundSize=groundSize
 	this.zoomRate=zoomRate
+	this.canvasElement.width=this.groundSize*this.zoomRate
+	this.canvasElement.height=this.groundSize*this.zoomRate
 	this.color=color
 	this.loopId=null
 	this.rawInput={
@@ -32,7 +35,12 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 	this.changeWall(wallNumber)
 	var textureImage=new Image()
 	textureImage.src=wallTexture
-	this.wallTexture=this.canvas.createPattern(textureImage,"repeat")
+	var textureElement=document.createElement("canvas")
+	textureElement.height=textureImage.height*this.zoomRate
+	textureElement.width=textureImage.width*this.zoomRate
+	var textureCanvas=textureElement.getContext("2d")
+	textureCanvas.drawImage(textureImage,0,0,textureImage.width,textureImage.height,0,0,textureElement.width,textureElement.height)
+	this.wallTexture=this.canvas.createPattern(textureElement,"repeat")
 	
 	this.score=0
 	this.noInputDuring=0
@@ -70,7 +78,7 @@ Game.prototype.loop=function(){
 	}else{
 		this.snake.move(0)
 	}
-	this.canvas.clearRect(0,0,this.groundSize,this.groundSize)
+	this.canvas.clearRect(0,0,this.groundSize*this.zoomRate,this.groundSize*this.zoomRate)
 	for(var i=0;i<this.wall.length;i++){
 		this.wall[i].draw(this)
 	}
@@ -87,7 +95,7 @@ Game.prototype.loop=function(){
 	if(this.noInputDuring>this.groundSize*this.groundSize/this.snakeSpeed/this.snakeWidth){
 		document.getElementById("pauseOverlay").style.visibility="visible"
 		document.getElementById("pauseOverlay").style.opacity="1"
-		document.getElementById("touchController").style.opacity="0"
+		if(systemVar.isTouch){document.getElementById("touchController").style.opacity="0"}
 		return
 	}
 	this.loopId=requestAnimationFrame(this.loop.bind(this))
@@ -116,10 +124,10 @@ Game.prototype.resetFood=function(){
 	
 	function checkValid(){
 		var answer=Math.abs(this.snake.headPoint.x-this.foodPoint.x)<this.foodSize/2||Math.abs(this.snake.headPoint.y-this.foodPoint.y)<this.foodSize/2
-		answer=answer||this.canvas.getImageData(Math.round(this.foodPoint.x+this.foodSize/2),Math.round(this.foodPoint.y+this.foodSize/2),1,1).data[3]!=0
-		answer=answer||this.canvas.getImageData(Math.round(this.foodPoint.x-this.foodSize/2),Math.round(this.foodPoint.y+this.foodSize/2),1,1).data[3]!=0
-		answer=answer||this.canvas.getImageData(Math.round(this.foodPoint.x+this.foodSize/2),Math.round(this.foodPoint.y-this.foodSize/2),1,1).data[3]!=0
-		answer=answer||this.canvas.getImageData(Math.round(this.foodPoint.x-this.foodSize/2),Math.round(this.foodPoint.y-this.foodSize/2),1,1).data[3]!=0
+		answer=answer||this.canvas.getImageData(Math.round((this.foodPoint.x+this.foodSize/2)*this.zoomRate),Math.round((this.foodPoint.y+this.foodSize/2)*this.zoomRate),1,1).data[3]!=0
+		answer=answer||this.canvas.getImageData(Math.round((this.foodPoint.x-this.foodSize/2)*this.zoomRate),Math.round((this.foodPoint.y+this.foodSize/2)*this.zoomRate),1,1).data[3]!=0
+		answer=answer||this.canvas.getImageData(Math.round((this.foodPoint.x+this.foodSize/2)*this.zoomRate),Math.round((this.foodPoint.y-this.foodSize/2)*this.zoomRate),1,1).data[3]!=0
+		answer=answer||this.canvas.getImageData(Math.round((this.foodPoint.x-this.foodSize/2)*this.zoomRate),Math.round((this.foodPoint.y-this.foodSize/2)*this.zoomRate),1,1).data[3]!=0
 		return answer
 	}
 	

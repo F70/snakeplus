@@ -28,7 +28,7 @@ systemVar.isTouch=("ontouchmove" in document)
 if(systemVar.isTouch){document.getElementsByTagName("html")[0].classList.add("touch")}
 
 function loadGame(){
-	game=new Game("snakeArea",1,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
+	game=new Game("snakeArea",2,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
 	game.setSnake()
 	if(systemVar.isTouch){document.getElementById("touchController").style.display="block"}
 	game.setController()
