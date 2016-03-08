@@ -55,12 +55,14 @@ Snake.prototype.shorten=function(length){
 	this.parts[0].shorten(length)
 }
 
-Snake.prototype.move=function(moveType){
-	this.extend(this.speed,moveType)
-	if(this.speed<=this.ungrownLength){
-		this.ungrownLength-=this.speed
+Snake.prototype.move=function(moveType,duration){
+	var distance=this.speed*duration*0.05
+	console.log(distance)
+	this.extend(distance,moveType)
+	if(distance<=this.ungrownLength){
+		this.ungrownLength-=distance
 	}else{
-		this.shorten(this.speed-this.ungrownLength)
+		this.shorten(distance-this.ungrownLength)
 		this.ungrownLength=0
 	}
 }

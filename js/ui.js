@@ -26,8 +26,9 @@ Game.prototype.setUI=function(){
 	}.bind(this)
 	
 	var continueGame=function(){
-			document.getElementById("pauseOverlay").style.opacity="0"
-			document.getElementById("pauseOverlay").style.visibility="hidden"	
+		document.getElementById("pauseOverlay").style.opacity="0"
+		document.getElementById("pauseOverlay").style.visibility="hidden"	
+		this.timeStamp=Date.now()
 		this.noInputDuring=0
 		this.loop()
 	}.bind(this)
