@@ -37,6 +37,8 @@ html,body{margin:0;height:100%}
 #playButton{width:80px;background-image:url(../img/play.svg)}
 #settingButton{margin-left:8px;background-image:url(../img/setting.svg)}
 #creditButton{margin-left:8px;background-image:url(../img/credit.svg)}
+.animation{background-image:url(../img/snake.svg);height:24px;width:384px;position:absolute;left:-64px;top:116px;animation-name:menuSnake;animation-timing-function:linear;animation-duration:1000ms;animation-iteration-count:infinite}
+@keyframes menuSnake{from{background-position-x:0}to{background-position-x:384px}}
 
 /*pauseOverlay*/
 #buttonsInPauseOverlay{position:absolute;bottom:0;top:0;left:0;right:0;width:142px;margin:auto;height:42px}

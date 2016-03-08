@@ -28,6 +28,8 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 	this.snakeSpeed=snakeSpeed
 	this.snakeTurningRadius=snakeTurningRadius
 	
+	document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
+	
 	this.foodSize=foodSize
 	
 	this.growthPerFood=growthPerFood
@@ -44,7 +46,8 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 	
 	this.score=0
 	this.noInputDuring=0
-
+	
+	this.timeStamp=Date.now()
 }
 
 Game.prototype.setSnake=function(){
@@ -53,6 +56,7 @@ Game.prototype.setSnake=function(){
 
 Game.prototype.loop=function(){
 	
+	var newTime=Date.now()
 	if(systemVar.isTouch&&document.getElementById("touchController").style.opacity=="0"){document.getElementById("touchController").style.opacity="1"}
 	if(document.getElementById("touchLeft").classList.contains("touching")&&this.rawInput.touchLeft.length==0){document.getElementById("touchLeft").classList.remove("touching")}
 	if(document.getElementById("touchRight").classList.contains("touching")&&this.rawInput.touchRight.length==0){document.getElementById("touchRight").classList.remove("touching")}
@@ -72,11 +76,11 @@ Game.prototype.loop=function(){
 	}
 	this.noInputDuring++
 	if(this.input.right>this.input.left){
-		this.snake.move(1)
+		this.snake.move(1,newTime-this.timeStamp)
 	}else if(this.input.right<this.input.left){
-		this.snake.move(-1)
+		this.snake.move(-1,newTime-this.timeStamp)
 	}else{
-		this.snake.move(0)
+		this.snake.move(0,newTime-this.timeStamp)
 	}
 	this.canvas.clearRect(0,0,this.groundSize*this.zoomRate,this.groundSize*this.zoomRate)
 	for(var i=0;i<this.wall.length;i++){
@@ -99,10 +103,12 @@ Game.prototype.loop=function(){
 		return
 	}
 	this.loopId=requestAnimationFrame(this.loop.bind(this))
+	this.timeStamp=newTime
 	
 }
 
 Game.prototype.pause=function(){
+	this.timeStamp=Date.now()
 	cancelAnimationFrame(this.loopId)
 	document.getElementById("pauseOverlay").style.visibility="visible"
 	document.getElementById("pauseOverlay").style.opacity="1"
@@ -110,6 +116,7 @@ Game.prototype.pause=function(){
 }
 
 Game.prototype.reset=function(){
+	this.timeStamp=Date.now()
 	this.score=0
 	this.dead=false
 	this.setSnake()

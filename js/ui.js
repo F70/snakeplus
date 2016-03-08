@@ -26,8 +26,9 @@ Game.prototype.setUI=function(){
 	}.bind(this)
 	
 	var continueGame=function(){
-			document.getElementById("pauseOverlay").style.opacity="0"
-			document.getElementById("pauseOverlay").style.visibility="hidden"	
+		document.getElementById("pauseOverlay").style.opacity="0"
+		document.getElementById("pauseOverlay").style.visibility="hidden"	
+		this.timeStamp=Date.now()
 		this.noInputDuring=0
 		this.loop()
 	}.bind(this)
@@ -72,6 +73,7 @@ Game.prototype.setUI=function(){
 		if(event.button==0){
 			document.getElementById("speedSliderButton").style.left=positionGenerator(event.offsetX)+"px"
 			this.snakeSpeed=1+positionGenerator(event.offsetX)/38
+			document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
 			this.ui.speedSliderLeft=event.clientX-event.offsetX
 			this.ui.speedSliderMouseStartPoint=event.clientX
 			addEventListener("mousemove",changeSpeedMouseMove,false)
@@ -84,13 +86,15 @@ Game.prototype.setUI=function(){
 			document.getElementById("speedSliderButton").style.transition="none"
 			document.getElementById("speedSliderButton").style.left=positionGenerator(event.clientX-this.ui.speedSliderLeft)+"px"
 			this.snakeSpeed=1+positionGenerator(event.clientX-this.ui.speedSliderLeft)/38
+			document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
 		}
 	}.bind(this)
 	
 	var changeSpeedMouseUp=function(event){
 		document.getElementById("speedSliderButton").style.left=positionGenerator(event.clientX-this.ui.speedSliderLeft)+"px"
 		document.getElementById("speedSliderButton").style.transition=""
-		this.snakeSpeed=1+positionGenerator(event.clientX-this.ui.speedSliderLeft)/38		
+		this.snakeSpeed=1+positionGenerator(event.clientX-this.ui.speedSliderLeft)/38
+		document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
 		removeEventListener("mousemove",changeSpeedMouseMove)
 		removeEventListener("mouseup",changeSpeedMouseUp)
 	}.bind(this)
@@ -102,6 +106,7 @@ Game.prototype.setUI=function(){
 			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").getBoundingClientRect().left
 			document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
 			this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38
+			document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
 			this.ui.speedSliderTouchStartPoint=touch.clientX
 			this.ui.speedSliderTouchId=touch.identifier
 			addEventListener("touchmove",changeSpeedTouchMove,false)
@@ -122,6 +127,7 @@ Game.prototype.setUI=function(){
 				document.getElementById("speedSliderButton").style.transition="none"
 				document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
 				this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38
+				document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"				
 			}
 		}.bind(this)
 		
@@ -136,7 +142,8 @@ Game.prototype.setUI=function(){
 			}
 			document.getElementById("speedSliderButton").style.left=positionGenerator(touch.clientX-this.ui.speedSliderLeft)+"px"
 			document.getElementById("speedSliderButton").style.transition=""
-			this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38		
+			this.snakeSpeed=1+positionGenerator(touch.clientX-this.ui.speedSliderLeft)/38
+			document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"				
 			removeEventListener("touchmove",changeSpeedTouchMove)
 			removeEventListener("touchend",changeSpeedTouchUp)
 			removeEventListener("touchcancel",changeSpeedTouchUp)
@@ -223,6 +230,7 @@ Game.prototype.setUI=function(){
 	
 	this.ui.goToScore=function(){
 		this.ui.toRunFunction=function(){
+			document.getElementById("pauseOverlay").style.opacity="0"
 			document.getElementById("score").style.opacity="1"
 			if(systemVar.isTouch){document.getElementById("touchController").style.opacity="0"}
 			document.getElementById("score").style.marginTop=(this.groundSize/2-72)+"px"
