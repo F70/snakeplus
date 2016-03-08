@@ -28,6 +28,8 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 	this.snakeSpeed=snakeSpeed
 	this.snakeTurningRadius=snakeTurningRadius
 	
+	document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
+	
 	this.foodSize=foodSize
 	
 	this.growthPerFood=growthPerFood

@@ -57,7 +57,6 @@ Snake.prototype.shorten=function(length){
 
 Snake.prototype.move=function(moveType,duration){
 	var distance=this.speed*duration*0.05
-	console.log(distance)
 	this.extend(distance,moveType)
 	if(distance<=this.ungrownLength){
 		this.ungrownLength-=distance

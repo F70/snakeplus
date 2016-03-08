@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="snake.js.svg">
+   sodipodi:docname="snake.svg">
   <defs
      id="defs4">
     <inkscape:path-effect
@@ -30,9 +30,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="78.040641"
-     inkscape:cy="16.750348"
+     inkscape:zoom="1.979899"
+     inkscape:cx="108.98428"
+     inkscape:cy="62.008735"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -41,7 +41,9 @@
      inkscape:window-height="705"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true">
     <inkscape:grid
        type="xygrid"
        id="grid4136"
@@ -65,11 +67,11 @@
      id="layer1"
      transform="translate(0,-1028.3622)">
     <path
-       style="fill:#ff7700;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
-       d="m -1.525879e-5,1028.3622 0,24 179.99999525879,0 24,-12 -24,-12 -179.99999525879,0 0,0 z"
+       style="fill:#ff7700;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 48.000011,1028.3622 0,24 179.999989,0 24,-12 -24,-12 -179.999989,0 0,0 z"
        id="path4138"
        inkscape:path-effect="#path-effect4140"
-       inkscape:original-d="m -1.525879e-5,1028.3622 0,24 179.99999525879,0 24,-12 -24,-12 -179.99999525879,0 0,0 z"
+       inkscape:original-d="m 48.000011,1028.3622 0,24 179.999989,0 24,-12 -24,-12 -179.999989,0 0,0 z"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
