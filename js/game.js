@@ -48,6 +48,9 @@ function Game(canvasId,zoomRate,groundSize,color,originalSnakeLength,snakeWidth,
 	this.noInputDuring=0
 	
 	this.timeStamp=Date.now()
+	
+	this.first=true
+	if(systemVar.isTouch){document.getElementById("help").style.display="none"}
 }
 
 Game.prototype.setSnake=function(){
@@ -116,6 +119,10 @@ Game.prototype.pause=function(){
 }
 
 Game.prototype.reset=function(){
+	if(this.first){
+		this.first=false
+		setTimeout(function(){document.getElementById("help").style.opacity=0},2000)
+	}
 	this.timeStamp=Date.now()
 	this.score=0
 	this.dead=false
