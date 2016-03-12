@@ -5,6 +5,7 @@
 	<meta id="viewport" name="viewport" content="width=512,user-scalable=no" />
 	<link rel="stylesheet" href="css/game.css">
 	<link rel="shortcut icon" href="favicon.ico">
+	<script src="js/detect.js"></script>
 	<script src="js/part.js"></script>
 	<script src="js/snake.js"></script>
 	<script src="js/wall.js"></script>
@@ -20,6 +21,7 @@
 			<div id="gameBox">
 				<canvas id="snakeArea" height="384px" width="384px"></canvas>
 				<div id="food"></div>
+				<div class="help" id="help"></div>
 			</div>
 			<div id="transitionBox"></div>
 			<div id="uiBox">
@@ -66,6 +68,9 @@
 				</div>
 				<div id="credit">
 					<div class="button" id="backToMenuFromCreditButton"></div>
+					<div class="button" id="f70logo"></div>
+					<div id="creditText"></div>
+					<div class="button" id="sourceButton"></div>
 				</div>
 				<div id="died">
 					<div id="buttonsInDied">
@@ -96,5 +101,6 @@
 			</div>
 			
 	</div>
+	<div id="error">Sorry, your browser do not support all the features we need to run this game.<br>Please try another browser, such as latest chrome or firefox.</div>
 </body>
 </html>

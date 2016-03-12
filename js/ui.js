@@ -58,6 +58,12 @@ Game.prototype.setUI=function(){
 		}.bind(this)
 	}.bind(this)
 
+	var linkGenerator=function(url){
+		return function(){
+			window.open(url)
+		}.bind(this)
+	}.bind(this)
+
 	var positionGenerator=function(x){return Math.max(12,Math.min(164,x))-12}
 	
 	if(systemVar.isTouch){
@@ -71,10 +77,10 @@ Game.prototype.setUI=function(){
 	
 	var changeSpeedMouseDown=function(event){
 		if(event.button==0){
+			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").getBoundingClientRect().left
 			document.getElementById("speedSliderButton").style.left=positionGenerator(event.offsetX)+"px"
-			this.snakeSpeed=1+positionGenerator(event.offsetX)/38
+			this.snakeSpeed=1+positionGenerator(event.clientX-this.ui.speedSliderLeft)/38
 			document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
-			this.ui.speedSliderLeft=event.clientX-event.offsetX
 			this.ui.speedSliderMouseStartPoint=event.clientX
 			addEventListener("mousemove",changeSpeedMouseMove,false)
 			addEventListener("mouseup",changeSpeedMouseUp,false)
@@ -161,6 +167,8 @@ Game.prototype.setUI=function(){
 	document.getElementById("backToMenuFromSettingButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
 	document.getElementById("backToMenuFromCreditButton").addEventListener("click",jumpToBoardFunctionGenerator("menu"),false)
 	document.getElementById("speedSliderArea").addEventListener("mousedown",changeSpeedMouseDown,false)
+	document.getElementById("f70logo").addEventListener("click",linkGenerator("http://benpigchu.com/f70"),false)
+	document.getElementById("sourceButton").addEventListener("click",linkGenerator("https://www.github.com/f70/snakeplus"),false)
 	if(systemVar.isTouch){
 		document.getElementById("playButton").addEventListener("touchend",touchVersionGenerator(turnToGame),false)
 		document.getElementById("settingButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("setting")),false)
@@ -173,6 +181,8 @@ Game.prototype.setUI=function(){
 		document.getElementById("backToMenuFromSettingButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("menu")),false)
 		document.getElementById("backToMenuFromCreditButton").addEventListener("touchend",touchVersionGenerator(jumpToBoardFunctionGenerator("menu")),false)
 		document.getElementById("speedSliderArea").addEventListener("touchstart",changeSpeedTouchDown,false)
+		document.getElementById("f70logo").addEventListener("touchend",touchVersionGenerator(linkGenerator("http://benpigchu.com/f70")),false)
+		document.getElementById("sourceButton").addEventListener("touchend",touchVersionGenerator(linkGenerator("https://www.github.com/f70/snakeplus")),false)
 	}
 	
 	for(var i=0;i<5;i++){

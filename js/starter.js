@@ -1,6 +1,5 @@
 var game
-var systemVar={}
-var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg","img/pause.svg","img/reset.svg","img/resetleft.svg","img/setting.svg","img/title.svg","img/snakespeed.svg","img/snake.svg","img/wallicon.svg","img/walllist.svg","img/wall.svg"]
+var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg","img/pause.svg","img/reset.svg","img/resetleft.svg","img/setting.svg","img/help.svg","img/title.svg","img/snakespeed.svg","img/snake.svg","img/f70.svg","img/credittext.svg","img/code.svg","img/wallicon.svg","img/walllist.svg","img/wall.svg"]
 var imageList=[]
 var loadedImageNumber=0
 
@@ -24,11 +23,8 @@ var resetViewport=function(){
 addEventListener("resize",resetViewport,false)
 resetViewport()
 
-systemVar.isTouch=("ontouchmove" in document)
-if(systemVar.isTouch){document.getElementsByTagName("html")[0].classList.add("touch")}
-
 function loadGame(){
-	game=new Game("snakeArea",2,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
+	game=new Game("snakeArea",window.devicePixelRatio+1,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
 	game.setSnake()
 	if(systemVar.isTouch){document.getElementById("touchController").style.display="block"}
 	game.setController()
