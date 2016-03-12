@@ -71,10 +71,10 @@ Game.prototype.setUI=function(){
 	
 	var changeSpeedMouseDown=function(event){
 		if(event.button==0){
+			this.ui.speedSliderLeft=document.getElementById("speedSliderArea").getBoundingClientRect().left
 			document.getElementById("speedSliderButton").style.left=positionGenerator(event.offsetX)+"px"
-			this.snakeSpeed=1+positionGenerator(event.offsetX)/38
+			this.snakeSpeed=1+positionGenerator(event.clientX-this.ui.speedSliderLeft)/38
 			document.getElementById("animation").style.animationDuration=1000*this.groundSize/(this.snakeSpeed*50)+"ms"
-			this.ui.speedSliderLeft=event.clientX-event.offsetX
 			this.ui.speedSliderMouseStartPoint=event.clientX
 			addEventListener("mousemove",changeSpeedMouseMove,false)
 			addEventListener("mouseup",changeSpeedMouseUp,false)
