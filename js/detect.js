@@ -10,10 +10,24 @@ try{
 }
 
 systemVar.isTouch=("ontouchmove" in document)
+var isMobile={
+	Android:function(){
+		return navigator.userAgent.match(/Android/i)?true:false;
+	},
+	BlackBerry:function(){
+		return navigator.userAgent.match(/BlackBerry/i)?true:false;
+	},
+	iOS:function(){
+		return navigator.userAgent.match(/iPhone|iPad|iPod/i)?true:false;
+	},
+	Windows:function(){
+		return navigator.userAgent.match(/IEMobile/i)?true:false;
+	},
+	any:function(){
+		return(isMobile.Android()||isMobile.BlackBerry()||isMobile.iOS()||isMobile.Windows());
+	}
+}
+systemVar.isTouch=systemVar.isTouch&&isMobile.any()
 if(systemVar.isTouch){document.getElementsByTagName("html")[0].classList.add("touch")}
-document.getElementById("viewport").setAttribute("content","width=100,user-scalable=no")
-if(Math.abs(window.innerWidth-100)>10){systemVar.isTouch=false}	
-document.getElementById("viewport").setAttribute("content","width=300,user-scalable=no")
-if(Math.abs(window.innerWidth-300)>10){systemVar.isTouch=false}		
 
 if(window.devicePixelRatio==undefined){window.devicePixelRatio=1}

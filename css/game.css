@@ -68,6 +68,9 @@ html,body{margin:0;height:100%}
 
 /*credit*/
 #backToMenuFromCreditButton{border:none;position:absolute;top:0;left:0;background-image:url(../img/back.svg)}
+#f70logo{width:104px;height:104px;position:absolute;left:0;right:0;top:20px;margin:auto;background-image:url(../img/f70.svg)}
+#sourceButton{position:absolute;left:0;right:0;margin:auto;bottom:16px;background-image:url(../img/code.svg)}
+#creditText{position:absolute;left:0;right:0;height:20px;width:236px;top:152px;margin:auto;background-image:url(../img/credittext.svg)}
 
 /*died*/
 #buttonsInDied{position:absolute;bottom:56px;left:0;right:0;width:92px;margin:auto;height:42px}
