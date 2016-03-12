@@ -4,6 +4,15 @@ var imageSrcList=["img/back.svg","img/credit.svg","img/font.svg","img/play.svg",
 var imageList=[]
 var loadedImageNumber=0
 
+systemVar.isTouch=("ontouchmove" in document)
+if(systemVar.isTouch){document.getElementsByTagName("html")[0].classList.add("touch")}
+document.getElementById("viewport").setAttribute("content","width=100,user-scalable=no")
+if(Math.abs(window.innerWidth-100)>10){systemVar.isTouch=false}	
+document.getElementById("viewport").setAttribute("content","width=300,user-scalable=no")
+if(Math.abs(window.innerWidth-300)>10){systemVar.isTouch=false}		
+
+if(window.devicePixelRatio==undefined){window.devicePixelRatio=1}
+
 var resetViewport=function(){
 	var size=Math.min(screen.width,screen.height)
 	var scale
@@ -24,11 +33,8 @@ var resetViewport=function(){
 addEventListener("resize",resetViewport,false)
 resetViewport()
 
-systemVar.isTouch=("ontouchmove" in document)
-if(systemVar.isTouch){document.getElementsByTagName("html")[0].classList.add("touch")}
-
 function loadGame(){
-	game=new Game("snakeArea",2,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
+	game=new Game("snakeArea",window.devicePixelRatio+1,384,"#F70",100,24,3,16,24,24,0,"img/wall.svg")
 	game.setSnake()
 	if(systemVar.isTouch){document.getElementById("touchController").style.display="block"}
 	game.setController()
