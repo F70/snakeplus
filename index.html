@@ -1,137 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Snakeplus...?</title>
-	<meta id="viewport" name="viewport" content="width=512,height=512,user-scalable=no">
+	<title>Snake+ β</title>
+	<meta id="viewport" name="viewport" content="width=512,user-scalable=no" />
+	<link rel="fluid-icon" href="fluidicon.png">
+	<link rel="apple-touch-icon" href="appletouch.png">
+	<link rel="apple-touch-icon" size="57x57" href="appletouch57.png">
+	<link rel="apple-touch-icon" size="60x60" href="appletouch60.png">
+	<link rel="apple-touch-icon" size="72x72" href="appletouch72.png">
+	<link rel="apple-touch-icon" size="76x76" href="appletouch76.png">
+	<link rel="apple-touch-icon" size="114x114" href="appletouch114.png">
+	<link rel="apple-touch-icon" size="120x120" href="appletouch120.png">
+	<link rel="apple-touch-icon" size="144x144" href="appletouch144.png">
+	<link rel="apple-touch-icon" size="152x152" href="appletouch152.png">
+	<link rel="apple-touch-icon" size="180x180" href="appletouch180.png">
+	<link rel="icon" sizes="192x192" href="androidchrome.png">
+	<link rel="mask-icon" href="iconlarge.svg" color="#000000">
+	<meta name="msapplication-TileImage" content="fluidicon.png">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="theme-color" content="#000000">
+	<meta name="description" content="A snake game that is different than the usual.">
+	<meta name="keywords" content="snakeplus,f70,benpigchu,snake,game">
+	<link rel="stylesheet" href="css/game.css">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="stylesheet" href="home.css">
+	<script src="js/detect.js"></script>
+	<script src="js/part.js"></script>
+	<script src="js/snake.js"></script>
+	<script src="js/wall.js"></script>
+	<script src="js/game.js"></script>
+	<script src="js/ui.js"></script>
+	<script src="js/controller.js"></script>
+	<script src="js/starter.js"></script>
 </head>
-<body>
-	<div class="box">
-		<div class="block" id="block0">
-			<div class="node" id="node0"></div>
-		</div>
-		<div class="block" id="block1">
-			<div class="node" id="node1"></div>
-			<div class="line" id="line1"></div>
-		</div>
-		<div class="block" id="block2">
-			<div class="node" id="node2"></div>
-			<div class="line" id="line2"></div>
-		</div>
-		<div class="block" id="block3">
-			<div class="node" id="node3"></div>
-			<div class="line" id="line3"></div>
-		</div>
-		<div class="block" id="block4">
-			<div class="node" id="node4"></div>
-			<div class="line" id="line4"></div>
-		</div>
-		<div class="block" id="block5">
-			<div class="node" id="node5"></div>
-			<div class="line" id="line5"></div>
-		</div>
-		<div class="block" id="block6">
-			<div class="node" id="node6"></div>
-			<div class="line" id="line6"></div>
-		</div>
-		<div class="block" id="block7">
-			<div class="node" id="node7"></div>
-			<div class="line" id="line7"></div>
-		</div>
-		<div class="block" id="block8">
-			<div class="node" id="node8"></div>
-			<div class="line" id="line8"></div>
-		</div>
-		<div class="block" id="block9">
-			<div class="node" id="node9"></div>
-			<div class="line" id="line9"></div>
-		</div>
-		<a href="beta.html">
-			<div id="jump"></div>
-		</a>
-	</div>
-	
-	<script>
-	//<![CDATA[
-	var resetViewport=function(){
-		var size=Math.min(screen.width,screen.height)
-		var scale
-		if(size<512){
-			scale=512
-		}else if(size<640){
-			scale=640
-		}else{
-			scale=768
-		}
-		if(screen.width>screen.height){
-			document.getElementById("viewport").setAttribute("content","width="+(scale*innerWidth)/innerHeight+",height="+scale+",user-scalable=no")
-		}else{
-			document.getElementById("viewport").setAttribute("content","width="+scale+",user-scalable=no")		
-		}
-	}
 
-	addEventListener("resize",resetViewport,false)
-	resetViewport()
-	
-	var nodePosition=[
-		{x:160,y:256},
-		{x:160,y:48},
-		{x:192,y:32},
-		{x:224,y:48},
-		{x:224,y:96},
-		{x:172,y:128},
-		{x:240,y:160},
-		{x:240,y:200},
-		{x:192,y:224},
-		{x:148,y:200},
-	]
-	for(var i=0;i<10;i++){
-		var blockElement=document.getElementById("block"+i)
-		blockElement.style.left=(nodePosition[i].x-13)+"px"
-		blockElement.style.top=(nodePosition[i].y-13)+"px"
-		if(i!=0){
-			var lineElement=document.getElementById("line"+i)
-			lineElement.style.left="12px"
-			lineElement.style.top="12px"
-			lineElement.style.width=Math.sqrt(Math.pow(nodePosition[i].x-nodePosition[i-1].x,2)+Math.pow(nodePosition[i].y-nodePosition[i-1].y,2))+"px"
-			lineElement.style.transformOrigin="left"
-			lineElement.style.transform="rotate("+180*Math.atan2(nodePosition[i-1].y-nodePosition[i].y,nodePosition[i-1].x-nodePosition[i].x)/(Math.PI)+"deg)"
-		}
-		blockElement.style.display="none"
-		var nextGenerator=function(i){
-			return function(){
-				document.getElementById("block"+(i+1)).style.display=""
-			}
-		}
-		var disappearGenerator=function(i){
-			return function(){
-				document.getElementById("node"+(i-1)).style.opacity=0
-			}
-		}
-		var fixGenerator=function(i){
-			return function(){
-				document.getElementById("node"+(i)).classList.add("clicked")
-			}
-		}
-		if(i!=0){
-			document.getElementById("node"+i).addEventListener("click",disappearGenerator(i),false)
-		}
-		document.getElementById("node"+i).addEventListener("click",fixGenerator(i),false)
-		if(i!=9){
-			document.getElementById("node"+i).addEventListener("click",nextGenerator(i),false)
-		}else{
-			document.getElementById("node"+i).addEventListener("click",function(){
-				document.getElementById("jump").style.visibility="visible"
-				document.getElementById("jump").style.transition="all 500ms"
-				document.getElementById("jump").style.opacity="1"
-			},false)
-		}
-	}
-	document.getElementById("node9").addEventListener("click",disappearGenerator(10),false)
-	document.getElementById("block0").style.display=""
-	//]]>	
-	</script>
+<body>
+	<div id="box">
+			
+			<div id="gameBox">
+				<canvas id="snakeArea" height="384px" width="384px"></canvas>
+				<div id="food"></div>
+				<div class="help" id="help"></div>
+			</div>
+			<div id="transitionBox"></div>
+			<div id="uiBox">
+				<div id="menu">
+					<div id="title"></div>
+					<div id="buttonsInMenu">
+						<div class="button" id="playButton"></div>
+						<div class="button" id="settingButton"></div>
+						<div class="button" id="creditButton"></div>
+					</div>
+					<div class="animation" id="animation"></div>
+				</div>
+				<div id="setting">
+					<div class="button" id="backToMenuFromSettingButton"></div>
+					<div id="settingList">
+						<div class="controller" id="wallController">
+							<div class="settingIcon" id="wallIcon"></div>
+							<div class="wallSelector" id="wallSelector0">
+								<div class="wallImage" id="wallImage0"></div>
+							</div>
+							<div class="wallSelector" id="wallSelector1">
+								<div class="wallImage" id="wallImage1"></div>
+							</div>
+							<div class="wallSelector" id="wallSelector2">
+								<div class="wallImage" id="wallImage2"></div>
+							</div>
+							<div class="wallSelector" id="wallSelector3">
+								<div class="wallImage" id="wallImage3"></div>
+							</div>
+							<div class="wallSelector" id="wallSelector4">
+								<div class="wallImage" id="wallImage4"></div>
+							</div>
+						</div>
+						<div class="controller" id="speedController">
+							<div class="settingIcon" id="lowSpeedIcon"></div>
+							<div class="slider" id="speedSlider">
+								<div class="sliderArea" id="speedSliderArea"></div>
+								<div class="sliderLine"></div>
+								<div class="sliderButton" id="speedSliderButton"></div>
+							</div>
+							<div class="settingIcon" id="highSpeedIcon"></div>
+						</div>
+					</div>
+				</div>
+				<div id="credit">
+					<div class="button" id="backToMenuFromCreditButton"></div>
+					<div class="button" id="f70logo"></div>
+					<div id="creditText"></div>
+					<div class="button" id="sourceButton"></div>
+				</div>
+				<div id="died">
+					<div id="buttonsInDied">
+						<div class="button" id="backToMenuFromDiedButton"></div>
+						<div class="button" id="tryAgainButton"></div>
+					</div>
+				</div>
+			</div>
+			<div id="pauseOverlay">
+				<div id="buttonsInPauseOverlay">
+					<div class="button" id="backToMenuFromGameButton"></div>
+					<div class="button" id="replayButton"></div>
+					<div class="button" id="continueButton"></div>
+				</div>
+			</div>
+			<div id="score"></div>
+
+			<div id="touchController">
+				<div class="touchArea" id="touchLeft">
+					<div class="touchBottom"></div>
+				</div>
+				<div class="touchArea" id="touchRight">
+					<div class="touchBottom"></div>
+				</div>
+				<div class="touchArea" id="touchPause">
+					<div class="touchBottom"></div>
+				</div>
+			</div>
+			
+	</div>
+	<div id="error">Sorry, your browser do not support all the features we need to run this game.<br>Please try another browser, such as latest chrome or firefox.</div>
 </body>
 </html>
